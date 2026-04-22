@@ -101,27 +101,18 @@ body.unlit #audio-toggle { display: none; }
   pointer-events: none;
 }
 
-/* Placeholder SVG layers. Replace backgrounds with Firefly PNG exports when ready. */
+/* Photo-backed forest scene. */
 .sky {
-  background:
-    linear-gradient(180deg, #1a1207 0%, #2a1a0b 30%, #3a2510 55%, #2d1a0c 75%, #0d0804 100%);
+  background: #0b0906 url("../assets/img/forest-tunnel.jpg") center center / cover no-repeat;
 }
 
-.moon {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'><defs><radialGradient id='m' cx='50%25' cy='50%25'><stop offset='0%25' stop-color='%23fff3d1' stop-opacity='0.95'/><stop offset='55%25' stop-color='%23ffd789' stop-opacity='0.3'/><stop offset='100%25' stop-color='%23ffd789' stop-opacity='0'/></radialGradient></defs><circle cx='1200' cy='200' r='80' fill='url(%23m)'/><circle cx='1200' cy='200' r='42' fill='%23fff3d1' opacity='0.9'/></svg>");
-}
+.moon { display: none; }
 
 .fog-far {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'><defs><linearGradient id='f' x1='0' x2='0' y1='0' y2='1'><stop offset='0%25' stop-color='%23d6c79a' stop-opacity='0'/><stop offset='100%25' stop-color='%23d6c79a' stop-opacity='0.22'/></linearGradient></defs><rect y='550' width='1600' height='350' fill='url(%23f)'/></svg>");
 }
 
-.trees-far {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMax slice'><path d='M0 700 L60 540 L90 620 L140 480 L180 580 L230 500 L280 600 L330 470 L380 580 L430 510 L490 610 L540 490 L600 590 L660 500 L720 600 L780 480 L840 590 L900 520 L960 610 L1020 490 L1080 600 L1140 510 L1200 600 L1260 480 L1320 580 L1380 510 L1440 600 L1500 490 L1560 600 L1600 540 L1600 900 L0 900 Z' fill='%23120b05'/></svg>");
-}
-
-.trees-mid {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMax slice'><path d='M0 900 L0 780 L50 640 L90 730 L130 580 L180 700 L240 560 L300 720 L360 600 L420 700 L490 560 L560 700 L630 590 L700 720 L770 580 L850 700 L920 600 L990 720 L1060 570 L1140 690 L1210 600 L1290 720 L1360 590 L1440 700 L1520 610 L1600 720 L1600 900 Z' fill='%230a0604'/></svg>");
-}
+.trees-far, .trees-mid, .trees-near { display: none; }
 
 .fog-mid {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'><defs><linearGradient id='g' x1='0' x2='0' y1='0' y2='1'><stop offset='0%25' stop-color='%23c9b98a' stop-opacity='0'/><stop offset='100%25' stop-color='%23c9b98a' stop-opacity='0.3'/></linearGradient></defs><rect y='650' width='1600' height='250' fill='url(%23g)'/></svg>");
@@ -129,9 +120,7 @@ body.unlit #audio-toggle { display: none; }
   opacity: 0.5;
 }
 
-.trees-near {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMax slice'><path d='M0 900 L0 760 L70 540 L110 660 L170 480 L230 620 L310 460 L380 620 L460 500 L540 640 L620 460 L700 620 L780 500 L860 640 L940 480 L1020 620 L1100 500 L1180 640 L1260 490 L1340 640 L1420 510 L1500 650 L1600 520 L1600 900 Z' fill='%23050302'/></svg>");
-}
+/* trees-near hidden above */
 
 .ferns {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMax slice'><path d='M0 900 L0 850 Q60 790 120 850 Q180 780 240 850 Q300 795 360 850 Q420 785 480 850 Q540 795 600 850 Q660 790 720 850 Q780 795 840 850 Q900 780 960 850 Q1020 800 1080 850 Q1140 785 1200 850 Q1260 795 1320 850 Q1380 790 1440 850 Q1500 800 1560 850 Q1600 820 1600 900 Z' fill='%23030201'/></svg>");
@@ -200,36 +189,60 @@ body.unlit #audio-toggle { display: none; }
   50% { transform: translate(-50%, 6px); opacity: 1; }
 }
 
-/* Tavern (placeholder next scene) */
+/* Tavern: campfire photo */
 .tavern {
-  background:
-    radial-gradient(circle at 50% 40%, rgba(255, 130, 50, 0.25), transparent 60%),
-    linear-gradient(180deg, #1b1007 0%, #0a0604 100%);
+  position: relative;
+  background: #0a0604 url("../assets/img/campfire.jpg") center center / cover no-repeat;
   display: grid; place-items: center;
   text-align: center;
 }
+.tavern::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0.25), rgba(0,0,0,0.8) 85%);
+  pointer-events: none;
+}
+.tavern .tavern-inner { position: relative; z-index: 1; }
 .tavern-inner, .castle-inner { max-width: 42rem; padding: 2rem; }
 .tavern h2 { font-size: clamp(3rem, 8vw, 5.5rem); color: var(--torch); margin: 0.4rem 0 1rem; }
 .tavern .note, .castle .note { margin-top: 2rem; font-size: 0.85rem; color: var(--ink-dim); font-style: italic; }
 
-/* Castle: Nottingham Keep */
+/* Castle: Nottingham Keep photo */
 .castle {
-  background:
-    radial-gradient(ellipse at 50% 110%, rgba(123, 35, 24, 0.35), transparent 55%),
-    linear-gradient(180deg, #0f0807 0%, #050302 100%);
+  position: relative;
+  background: #050302 url("../assets/img/castle-mist.jpg") center center / cover no-repeat;
   display: grid; place-items: center;
   text-align: center;
 }
+.castle::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(5,3,2,0.1) 0%, rgba(5,3,2,0.75) 100%);
+  pointer-events: none;
+}
+.castle .castle-inner { position: relative; z-index: 1; }
 .castle h2 { font-size: clamp(3rem, 8vw, 5.5rem); color: #c9543a; margin: 0.4rem 0 1rem; text-shadow: 0 0 30px rgba(201, 84, 58, 0.4); }
 
-/* Programme scene */
+/* Programme scene: arrows band top and bottom */
 .programme {
+  position: relative;
   background:
     radial-gradient(circle at 50% 40%, rgba(239, 228, 199, 0.08), transparent 60%),
     linear-gradient(180deg, #120b07 0%, #0a0604 100%);
   display: grid; place-items: center;
   text-align: center;
 }
+.programme::before, .programme::after {
+  content: "";
+  position: absolute; left: 0; right: 0; height: 8vh;
+  background: url("../assets/img/arrows.jpg") center center / cover no-repeat;
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.programme::before { top: 0; }
+.programme::after { bottom: 0; transform: scaleX(-1); }
+.programme .tavern-inner { position: relative; z-index: 1; }
 .programme h2 { font-size: clamp(2.4rem, 6vw, 4rem); color: var(--parchment); margin: 0.4rem 0 1rem; }
 .programme-list {
   display: grid;

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sherwood! A Merry Playbill</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Henny+Penny&family=Fredericka+the+Great&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="gate" class="gate">
+    <div class="gate-inner">
+      <p class="caveat gate-kicker">a merry playbill</p>
+      <h1 class="henny gate-title">Sherwood!</h1>
+      <p class="gate-sub">Arrows fly. Ale spills. The sheriff&rsquo;s horse laughs at him.</p>
+      <button id="enter" class="enter-btn">Skip into the forest &rarr;</button>
+      <p class="gate-foot">Sound recommended. Click to begin.</p>
+    </div>
+  </div>
+
+  <button id="audio-toggle" aria-label="Toggle sound" title="Toggle sound">&#9834;</button>
+
+  <section class="scene" id="forest">
+    <div class="layer sky-c" data-speed="0.1"></div>
+    <div class="layer leaves-c" data-speed="0.3"></div>
+    <div class="layer ferns-c" data-speed="0.7"></div>
+
+    <div class="hotspots">
+      <button class="hotspot"
+        aria-label="The Blue Boar Inn"
+        data-scent="roast boar, honey, and someone&rsquo;s socks"
+        data-title="The Blue Boar Inn"
+        data-lore="Little John is doing the splits. Friar Tuck is holding court at Table 4. Maid Marian has the high score at darts."
+        data-target="tavern"
+        data-cta="Join the feast!"
+        style="left:18%; top:60%">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 16 L16 6 L28 16 L28 28 L4 28 Z" fill="#E55757" stroke="#2a1c0a" stroke-width="2" stroke-linejoin="round"/>
+          <rect x="13" y="19" width="6" height="9" fill="#5a3d1a" stroke="#2a1c0a" stroke-width="1.5"/>
+          <rect x="7" y="19" width="4" height="4" fill="#FFD95C" stroke="#2a1c0a" stroke-width="1.2"/>
+          <rect x="21" y="19" width="4" height="4" fill="#FFD95C" stroke="#2a1c0a" stroke-width="1.2"/>
+        </svg>
+      </button>
+
+      <button class="hotspot"
+        aria-label="Nottingham Keep"
+        data-scent="too much cologne and sheriff&rsquo;s hair oil"
+        data-title="Nottingham Keep"
+        data-lore="The Sheriff is losing an argument with his own mustache. Prince John is demanding a third helping of pudding."
+        data-target="castle"
+        data-cta="Laugh at the Sheriff"
+        style="left:50%; top:68%">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 28 L4 14 L7 14 L7 10 L10 10 L10 14 L13 14 L13 10 L16 10 L16 14 L19 14 L19 10 L22 10 L22 14 L25 14 L25 10 L28 10 L28 14 L28 28 Z" fill="#FFD95C" stroke="#2a1c0a" stroke-width="2" stroke-linejoin="round"/>
+          <rect x="14" y="20" width="4" height="8" fill="#5a3d1a" stroke="#2a1c0a" stroke-width="1.5"/>
+        </svg>
+      </button>
+
+      <button class="hotspot"
+        aria-label="The Playbill"
+        data-scent="fresh ink, popcorn, and excitement"
+        data-title="The Playbill Proper"
+        data-lore="Dates! Times! Prices! The stage address! All the stuff you actually need to come see the show."
+        data-target="programme"
+        data-cta="Read the playbill!"
+        style="left:78%; top:54%">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="7" y="5" width="18" height="22" fill="#FFF9E6" stroke="#2a1c0a" stroke-width="2"/>
+          <line x1="10" y1="11" x2="22" y2="11" stroke="#2a1c0a" stroke-width="1.5"/>
+          <line x1="10" y1="15" x2="22" y2="15" stroke="#2a1c0a" stroke-width="1.5"/>
+          <line x1="10" y1="19" x2="19" y2="19" stroke="#2a1c0a" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="3" fill="#E55757" stroke="#2a1c0a" stroke-width="1.5"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="title-card">
+      <p class="kicker caveat">Act the First</p>
+      <h2 class="henny">The Sunny Greenwood</h2>
+      <p class="lede">Birds sing. Robin whistles. Somewhere a pie cools on a windowsill.</p>
+    </div>
+
+    <div class="scroll-cue"><span>scroll down!</span> <span class="arrow">&darr;</span></div>
+  </section>
+
+  <section class="scene tavern" id="tavern">
+    <div class="tavern-inner">
+      <p class="kicker caveat">Act the Second</p>
+      <h2 class="henny">The Blue Boar Inn (Louder!)</h2>
+      <p class="lede">A fiddle. A fight. Someone just offered to buy a round for the whole house.</p>
+      <p class="note">This is the kind of scene Ken Ludwig writes better than anyone living.</p>
+    </div>
+  </section>
+
+  <section class="scene castle" id="castle">
+    <div class="castle-inner">
+      <p class="kicker caveat">Act the Third</p>
+      <h2 class="henny">Nottingham Keep (Ridiculous Edition)</h2>
+      <p class="lede">Prince John stamps his foot. The Sheriff trips on his own cloak. A swan waddles through the throne room.</p>
+      <p class="note">Arrows will be shot. Dignity will be lost. Heroes will win anyway.</p>
+    </div>
+  </section>
+
+  <section class="scene programme" id="programme">
+    <div class="tavern-inner">
+      <p class="kicker caveat">The Playbill</p>
+      <h2 class="henny">When &amp; Where</h2>
+      <p class="lede"><time datetime="2026-05-21">May 21</time> to <time datetime="2026-06-12">June 12, 2026</time></p>
+      <dl class="programme-list">
+        <dt>Thu &ndash; Sat</dt><dd>7:30 PM</dd>
+        <dt>Sundays</dt><dd>2:00 PM</dd>
+        <dt>General</dt><dd>$14</dd>
+        <dt>Youth &amp; Seniors</dt><dd>$12</dd>
+      </dl>
+      <address class="venue">Second Stage Theatre<br>2730 Wetmore Ave, Everett WA 98201</address>
+      <p class="note"><a href="../Sherwood">&larr; Back to the Playbill</a></p>
+    </div>
+  </section>
+
+  <div id="flavor" aria-live="polite"></div>
+
+  <div id="flavor-card" class="flavor-card" role="dialog" aria-modal="true" aria-labelledby="flavor-title" aria-describedby="flavor-lore">
+    <div class="flavor-inner">
+      <button class="flavor-close" aria-label="Close">&times;</button>
+      <p class="flavor-scent"></p>
+      <h3 id="flavor-title" class="henny"></h3>
+      <p id="flavor-lore"></p>
+      <button class="flavor-go"></button>
+    </div>
+  </div>
+
+  <div id="veil" aria-hidden="true"></div>
+
+  <footer class="colophon">
+    <p><em>Sherwood</em> presented by arrangement with <a href="https://www.concordtheatricals.com">Concord Theatricals</a> on behalf of Samuel French, Inc.</p>
+    <p>Music: <em>Merry Go</em> by Kevin MacLeod &middot; incompetech.com &middot; CC BY 3.0</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/scene.js"></script>
+</body>
+</html>

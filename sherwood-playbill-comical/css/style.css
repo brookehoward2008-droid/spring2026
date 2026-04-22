@@ -1,0 +1,382 @@
+/* Sherwood Comical: bright, bouncy, sunny Robin Hood. */
+
+:root {
+  --ink: #2a1c0a;
+  --ink-soft: #5a3d1a;
+  --cream: #FFF9E6;
+  --sky: #87CEEB;
+  --grass: #7FB550;
+  --sun: #FFD95C;
+  --apple: #E55757;
+  --wood: #8B5E34;
+  --henny: "Henny Penny", serif;
+  --caveat: "Caveat", cursive;
+  --fred: "Fredericka the Great", Georgia, serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--caveat);
+  font-size: 18px;
+  overflow-x: hidden;
+}
+
+.henny { font-family: var(--henny); font-weight: 400; }
+.caveat { font-family: var(--caveat); }
+
+/* Gate */
+.gate {
+  position: fixed; inset: 0; z-index: 50;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(circle at 50% 25%, var(--sun) 0%, transparent 55%),
+    linear-gradient(180deg, var(--sky) 0%, #b5e0f2 100%);
+  text-align: center;
+  transition: opacity 0.8s ease;
+}
+.gate.hidden { opacity: 0; pointer-events: none; }
+.gate-inner { max-width: 36rem; padding: 2rem; }
+.gate-kicker { font-size: 1.8rem; color: var(--apple); letter-spacing: 0.05em; }
+.gate-title {
+  font-size: clamp(5rem, 16vw, 12rem);
+  color: var(--apple);
+  line-height: 1;
+  text-shadow: 4px 4px 0 var(--sun), 8px 8px 0 var(--wood);
+  animation: wiggle 3s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.gate-sub { font-size: 1.4rem; margin: 1rem 0 2rem; color: var(--ink); }
+.enter-btn {
+  font-family: var(--henny);
+  font-size: 1.4rem;
+  padding: 1rem 2.4rem;
+  background: var(--apple);
+  color: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 2.5rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: all 0.2s ease;
+}
+.enter-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--sun);
+  color: var(--ink);
+}
+.enter-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.gate-foot { margin-top: 1.5rem; font-size: 1.1rem; color: var(--ink-soft); }
+
+/* Audio toggle */
+#audio-toggle {
+  position: fixed; right: 1.2rem; bottom: 1.2rem;
+  z-index: 45;
+  width: 3.2rem; height: 3.2rem;
+  border-radius: 50%;
+  background: var(--sun);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: all 0.2s ease;
+}
+#audio-toggle:hover { background: var(--apple); color: var(--cream); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+
+/* Scenes */
+.scene {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+.layer {
+  position: absolute;
+  inset: -6%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Forest: sunny greenwood photo */
+.sky-c {
+  background-image: url("../assets/img/sunny-greenwood.jpg");
+}
+.leaves-c {
+  background: linear-gradient(180deg, transparent 40%, rgba(127, 181, 80, 0.25) 90%, rgba(127, 181, 80, 0.4) 100%);
+}
+.ferns-c {
+  background: linear-gradient(0deg, rgba(43, 91, 24, 0.4) 0%, rgba(43, 91, 24, 0.15) 15%, transparent 35%);
+}
+
+/* Hotspots */
+.hotspots { position: absolute; inset: 0; z-index: 5; }
+.hotspot {
+  position: absolute;
+  width: 4rem; height: 4rem;
+  border-radius: 50%;
+  border: 3px solid var(--ink);
+  background: var(--cream);
+  cursor: pointer;
+  display: grid; place-items: center;
+  animation: bounce 1.8s ease-in-out infinite;
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 0;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.hotspot svg { width: 2.4rem; height: 2.4rem; }
+.hotspot:hover, .hotspot:focus-visible {
+  transform: scale(1.2) rotate(-6deg);
+  background: var(--sun);
+  outline: none;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.hotspot:nth-of-type(2) { animation-delay: -0.6s; }
+.hotspot:nth-of-type(3) { animation-delay: -1.2s; }
+
+/* Title card */
+.title-card {
+  position: absolute;
+  left: 6%; top: 8%;
+  z-index: 6;
+  max-width: 30rem;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  padding: 1rem 1.6rem;
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: rotate(-2deg);
+}
+.kicker { font-size: 1.3rem; color: var(--apple); }
+.title-card h2 { font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.05; color: var(--wood); margin: 0.3rem 0 0.6rem; }
+.lede { font-size: 1.25rem; line-height: 1.4; color: var(--ink); }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 0.5rem 1.2rem;
+  border: 3px solid var(--ink);
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  animation: bob 1.6s ease-in-out infinite;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.scroll-cue .arrow { display: inline-block; font-size: 1.4rem; margin-left: 0.3rem; }
+@keyframes bob {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 6px); }
+}
+
+/* Tavern: merry tavern photo */
+.tavern {
+  position: relative;
+  background: var(--wood) url("../assets/img/merry-tavern.jpg") center center / cover no-repeat;
+  display: grid; place-items: center;
+  text-align: center;
+}
+.tavern::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(255, 217, 92, 0.35);
+  pointer-events: none;
+}
+.tavern-inner, .castle-inner {
+  position: relative; z-index: 1;
+  max-width: 40rem;
+  padding: 2rem 2.2rem;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  transform: rotate(-1deg);
+}
+.tavern h2, .castle h2 {
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  color: var(--apple);
+  margin: 0.4rem 0 1rem;
+  line-height: 1.1;
+}
+.tavern .note, .castle .note { margin-top: 1.2rem; font-size: 1.05rem; color: var(--ink-soft); font-style: italic; }
+
+/* Castle: daylight castle photo */
+.castle {
+  position: relative;
+  background: var(--sky) url("../assets/img/daylight-castle.jpg") center center / cover no-repeat;
+  display: grid; place-items: center;
+  text-align: center;
+}
+.castle::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(135, 206, 235, 0.25);
+  pointer-events: none;
+}
+.castle-inner { transform: rotate(1.5deg); }
+.castle h2 { color: var(--wood); }
+
+/* Programme: sun gold with pennant strips */
+.programme {
+  position: relative;
+  background: var(--sun);
+  display: grid; place-items: center;
+  text-align: center;
+}
+.programme::before, .programme::after {
+  content: "";
+  position: absolute; left: 0; right: 0; height: 14vh;
+  background: url("../assets/img/pennants.jpg") center center / cover no-repeat;
+  pointer-events: none;
+}
+.programme::before { top: 0; }
+.programme::after { bottom: 0; transform: scaleY(-1); }
+.programme .tavern-inner { transform: rotate(0deg); position: relative; z-index: 2; }
+.programme h2 { color: var(--wood); }
+.programme-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.6rem;
+  max-width: 22rem;
+  margin: 1.2rem auto;
+  text-align: left;
+  font-size: 1.25rem;
+}
+.programme-list dt { font-family: var(--henny); color: var(--apple); }
+.programme-list dd { margin: 0; color: var(--ink); font-family: var(--caveat); font-size: 1.35rem; }
+.programme .venue { margin-top: 1rem; font-size: 1.15rem; color: var(--ink-soft); line-height: 1.5; font-style: italic; }
+.programme .note a { color: var(--apple); text-decoration: none; border-bottom: 2px solid var(--apple); }
+
+/* Flavor tooltip (quick scent preview) */
+#flavor {
+  position: fixed;
+  left: 50%; bottom: 10%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 46;
+  padding: 0.6rem 1.4rem;
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  color: var(--ink);
+  font-size: 1.15rem;
+  box-shadow: 4px 4px 0 var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#flavor.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Flavor card */
+.flavor-card {
+  position: fixed;
+  inset: 0;
+  z-index: 47;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 217, 92, 0.85);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  padding: 2rem;
+}
+.flavor-card.show {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.flavor-inner {
+  position: relative;
+  max-width: 34rem;
+  width: 100%;
+  padding: 2.4rem 2.2rem 2rem;
+  background: var(--cream);
+  border: 4px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--ink);
+  transform: translateY(14px) rotate(-1deg);
+  transition: transform 0.35s ease;
+}
+.flavor-card.show .flavor-inner { transform: translateY(0) rotate(-1deg); }
+.flavor-close {
+  position: absolute;
+  top: 0.3rem; right: 0.7rem;
+  background: transparent;
+  color: var(--ink);
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0.2rem 0.6rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.flavor-close:hover, .flavor-close:focus-visible { color: var(--apple); outline: none; transform: rotate(90deg); }
+.flavor-scent {
+  font-family: var(--caveat);
+  font-size: 1.25rem;
+  color: var(--apple);
+  margin: 0 0 0.4rem;
+}
+#flavor-title {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  color: var(--wood);
+  margin: 0 0 1rem;
+  line-height: 1.1;
+}
+#flavor-lore {
+  font-size: 1.25rem;
+  color: var(--ink);
+  line-height: 1.5;
+  margin: 0 0 1.6rem;
+}
+.flavor-go {
+  font-family: var(--henny);
+  font-size: 1.2rem;
+  padding: 0.75rem 1.8rem;
+  background: var(--apple);
+  color: var(--cream);
+  border: 3px solid var(--ink);
+  border-radius: 2.5rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: all 0.2s ease;
+}
+.flavor-go:hover, .flavor-go:focus-visible {
+  background: var(--sun);
+  color: var(--ink);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+  outline: none;
+}
+
+/* Transition veil (sunny flash) */
+#veil {
+  position: fixed;
+  inset: 0;
+  background: var(--sun);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 48;
+  transition: opacity 0.4s ease;
+}
+#veil.show { opacity: 0.95; }
+
+/* Colophon */
+.colophon {
+  position: relative;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1rem;
+  background: var(--wood);
+  color: var(--cream);
+  line-height: 1.5;
+}
+.colophon a { color: var(--sun); }
