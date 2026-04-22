@@ -2,46 +2,206 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sherwood: The Adventures of Robin Hood</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sherwood: The Adventures of Robin Hood &middot; Everett KIDSTAGE</title>
+    <meta name="description" content="Playbill for Ken Ludwig's Sherwood: The Adventures of Robin Hood, an Everett KIDSTAGE TeenSelect Production. May 21 through June 12, 2026 at Second Stage Theatre, Everett, WA.">
+    <meta name="author" content="Brooke">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <style>
+        /* Playbill styles kept in-head so this file stands alone for class review. */
+        :root {
+            --ink: #2a1c0a;
+            --ink-soft: #5a3d1a;
+            --rule: #8a6b3a;
+            --page: #f3e9cd;
+            --accent: #7b2318;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: "IM Fell English", Georgia, serif;
+            color: var(--ink);
+            background: var(--page);
+            line-height: 1.65;
+            max-width: 46rem;
+            margin: 2.5rem auto;
+            padding: 0 1.4rem 3rem;
+        }
+        header {
+            text-align: center;
+            border-bottom: 2px double var(--rule);
+            padding-bottom: 1.4rem;
+            margin-bottom: 1.4rem;
+        }
+        .kicker {
+            font-family: "IM Fell English SC", Georgia, serif;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            margin: 0.2rem 0;
+        }
+        .playwright {
+            font-size: 1rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-top: 0.8rem;
+        }
+        h1 {
+            font-family: "UnifrakturMaguntia", serif;
+            font-size: 2.8rem;
+            color: var(--accent);
+            line-height: 1.05;
+            margin: 0.3rem 0 0.6rem;
+            font-weight: 400;
+        }
+        .origin {
+            font-style: italic;
+            color: var(--ink-soft);
+            font-size: 0.92rem;
+            margin: 0.8rem 0 0;
+        }
+        h2 {
+            font-family: "IM Fell English SC", Georgia, serif;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 1rem;
+            color: var(--ink-soft);
+            margin: 2rem 0 0.6rem;
+            border-bottom: 1px solid var(--rule);
+            padding-bottom: 0.3rem;
+        }
+        .synopsis { font-size: 1.08rem; margin: 0.6rem 0 0; }
+        dl.schedule, dl.prices {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            gap: 0.4rem 1.4rem;
+            margin: 0.6rem 0 0;
+        }
+        dt {
+            font-family: "IM Fell English SC", Georgia, serif;
+            letter-spacing: 0.06em;
+            color: var(--ink-soft);
+        }
+        dd { margin: 0; }
+        .run time { font-weight: bold; }
+        address {
+            font-style: normal;
+            line-height: 1.55;
+            margin-top: 0.4rem;
+        }
+        .arrangement {
+            margin-top: 2.4rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--rule);
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--ink-soft);
+            text-align: center;
+        }
+        .concord {
+            display: inline-block;
+            margin-top: 0.6rem;
+            padding: 0.25rem 0.8rem;
+            border: 1px solid var(--ink-soft);
+            font-family: "IM Fell English SC", Georgia, serif;
+            letter-spacing: 0.12em;
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+        }
+        a { color: var(--accent); }
+        a:hover { text-decoration: none; }
+        .cta {
+            display: block;
+            margin: 2.4rem auto 0;
+            max-width: 22rem;
+            padding: 0.9rem 1.6rem;
+            background: #1a120a;
+            color: #ffb560;
+            font-family: "IM Fell English SC", Georgia, serif;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            text-decoration: none;
+            text-align: center;
+            border: 1px solid #ffb560;
+        }
+        .cta:hover { background: #ffb560; color: #1a120a; }
+        @media print {
+            body { max-width: none; margin: 0; padding: 1in; background: white; }
+            .cta { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Sherwood: The Adventures of Robin Hood</h1>
+    <!-- Page header: show identity and origin credit. -->
+    <header>
+        <p class="kicker">An Everett KIDSTAGE TeenSelect Production</p>
+        <p class="playwright">Ken Ludwig&rsquo;s</p>
+        <h1>Sherwood: The Adventures of Robin Hood</h1>
+        <p class="origin">
+            Originally developed and produced at The Old Globe.<br>
+            Barry Edelstein, Artistic Director &middot; Timothy J. Shields, Managing Director
+        </p>
+    </header>
 
-    <h2>Ken Ludwig's SHERWOOD: THE ADVENTURES OF ROBIN HOOD</h2>
+    <!-- The show: synopsis, dates, tickets, venue. -->
+    <article>
 
-    <p>Originally developed and produced at The Old Globe, Barry Edelstein, Artistic Director, Timothy J. Shields, Managing Director</p>
+        <h2>About the Play</h2>
+        <p class="synopsis">
+            Robbing from the rich has never been so fun! A greedy prince has taken control of England,
+            and it is up to Robin Hood and his band of Merry Men, and women, to fight for justice and
+            champion for the underdog. From comic mastermind Ken Ludwig
+            (<cite>Lend Me a Tenor</cite>, <cite>Crazy for You</cite>) comes this rollicking and
+            inventive play, packed with delightful thrills, amorous exploits, contagious laughs, and
+            great beloved heroes like Little John, Friar Tuck, and Maid Marian. So get ready to dodge
+            an arrow or two. You won&rsquo;t want to miss a moment of this swashbuckling adventure!
+        </p>
 
-    <h3>An Everett KIDSTAGE TeenSelect Production</h3>
+        <h2>Performance Dates</h2>
+        <p class="run">
+            <time datetime="2026-05-21">May 21</time> &ndash;
+            <time datetime="2026-06-12">June 12, 2026</time>
+        </p>
+        <dl class="schedule">
+            <dt>Thursdays &ndash; Saturdays</dt>
+            <dd><time>7:30 PM</time></dd>
+            <dt>Sundays</dt>
+            <dd><time>2:00 PM</time></dd>
+        </dl>
 
-    <h2>About the Show</h2>
+        <h2>Tickets</h2>
+        <dl class="prices">
+            <dt>General Admission</dt>
+            <dd>$14</dd>
+            <dt>Youth &amp; Seniors</dt>
+            <dd>$12</dd>
+        </dl>
 
-    <p>Robbing from the rich has never been so fun! A greedy prince has taken control of England, and it is up to Robin Hood and his band of Merry Men, and women, to fight for justice and champion for the underdog. From comic mastermind Ken Ludwig (Lend Me a Tenor, Crazy for You) comes this rollicking and inventive play, packed with delightful thrills, amorous exploits, contagious laughs, and great beloved heroes like Little John, Friar Tuck, and Maid Marian. So get ready to dodge an arrow or two, you won't want to miss a moment of this swashbuckling adventure!</p>
+        <h2>Location</h2>
+        <address>
+            Second Stage Theatre<br>
+            2730 Wetmore Ave<br>
+            Everett, WA 98201
+        </address>
 
-    <h2>Performance Dates</h2>
+    </article>
 
-    <p>May 21 - June 12, 2026</p>
+    <!-- Licensing and arrangement credit. -->
+    <p class="arrangement">
+        &ldquo;Ken Ludwig&rsquo;s Sherwood: The Adventures of Robin Hood&rdquo; is presented by
+        arrangement with <a href="https://www.concordtheatricals.com" rel="external">Concord Theatricals</a>
+        on behalf of Samuel French, Inc.<br>
+        <span class="concord">Concord Theatricals</span>
+    </p>
 
-    <h3>Show Times</h3>
-
-    <p>Thursdays - Saturdays: 7:30 PM</p>
-    <p>Sundays: 2:00 PM</p>
-
-    <h2>Ticket Information</h2>
-
-    <h3>Prices</h3>
-
-    <p>$14 General | $12 Youth and Seniors</p>
-
-    <h3>Location</h3>
-
-    <p>Second Stage Theatre<br>
-    2730 Wetmore Ave<br>
-    Everett WA 98201</p>
-
-    <h2>Licensing</h2>
-
-    <p>"Ken Ludwig's Sherwood: The Adventures of Robin Hood" is presented by arrangement with Concord Theatricals on behalf of Samuel French, Inc. <a href="https://www.concordtheatricals.com">www.concordtheatricals.com</a></p>
+    <!-- Bonus: link to the immersive Sherwood experience. -->
+    <a class="cta" href="sherwood-playbill/">Step into the Wood &rarr;</a>
 
 </body>
 </html>

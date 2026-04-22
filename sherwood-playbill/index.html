@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sherwood: A Playbill (Immersive)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="unlit">
+
+  <div id="gate" class="gate">
+    <div class="gate-inner">
+      <p class="fraktur gate-kicker">A Playbill</p>
+      <h1 class="fraktur gate-title">Sherwood</h1>
+      <p class="gate-sub">Ken Ludwig&rsquo;s Adventures of Robin Hood. An Everett KIDSTAGE TeenSelect Production.</p>
+      <button id="enter" class="enter-btn">Step into the wood</button>
+      <p class="gate-foot">Sound recommended. Click anywhere to begin.</p>
+    </div>
+  </div>
+
+  <canvas id="torch"></canvas>
+
+  <button id="audio-toggle" aria-label="Toggle sound" title="Toggle sound">&#9834;</button>
+
+  <section class="scene" id="forest">
+    <div class="layer sky" data-speed="0.05"></div>
+    <div class="layer moon" data-speed="0.1"></div>
+    <div class="layer fog-far" data-speed="0.18"></div>
+    <div class="layer trees-far" data-speed="0.3"></div>
+    <div class="layer trees-mid" data-speed="0.55"></div>
+    <div class="layer fog-mid" data-speed="0.45"></div>
+    <div class="layer trees-near" data-speed="0.85"></div>
+    <div class="layer ferns" data-speed="1.15"></div>
+
+    <div class="hotspots">
+      <button class="hotspot"
+        aria-label="The Blue Boar Inn"
+        data-scent="ale, woodsmoke, wet wool"
+        data-title="The Blue Boar Inn"
+        data-lore="Fiddles and pewter tankards, a hearth crackling through the night. The outlaws gather here when the forest grows cold."
+        data-target="tavern"
+        data-cta="Enter the Tavern"
+        style="left:18%; top:64%">
+        <svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="16" cy="3" r="1.5" />
+          <line x1="16" y1="4.5" x2="16" y2="7" />
+          <path d="M10 7 L22 7 L20 10 L12 10 Z" />
+          <rect x="11" y="10" width="10" height="14" />
+          <line x1="11" y1="14" x2="21" y2="14" />
+          <line x1="11" y1="20" x2="21" y2="20" />
+          <path d="M10 24 L22 24 L20 27 L12 27 Z" />
+          <path d="M16 13 Q14 15 16 18 Q18 15 16 13 Z" fill="currentColor" stroke="none" />
+        </svg>
+      </button>
+
+      <button class="hotspot"
+        aria-label="Nottingham Keep"
+        data-scent="wet leaves, black soil, old iron"
+        data-title="Nottingham Keep"
+        data-lore="Banners on stone. The sheriff&rsquo;s men in the yard. A prince who takes what is not his. This is where the bow is drawn."
+        data-target="castle"
+        data-cta="Approach the Keep"
+        style="left:52%; top:72%">
+        <svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 4 Q22 16 8 28" />
+          <line x1="8" y1="4" x2="8" y2="28" />
+          <line x1="4" y1="16" x2="28" y2="16" />
+          <path d="M28 16 L24 13 M28 16 L24 19" />
+          <path d="M4 16 L7 14 M4 16 L7 18" />
+        </svg>
+      </button>
+
+      <button class="hotspot"
+        aria-label="The Programme"
+        data-scent="tallow, vellum, ink, rosemary"
+        data-title="The Programme"
+        data-lore="Dates, times, tickets, and the address of the stage. Everything you need to take your seat."
+        data-target="programme"
+        data-cta="Read the Playbill"
+        style="left:78%; top:52%">
+        <svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="6" width="16" height="20" />
+          <ellipse cx="8" cy="6" rx="2" ry="4" />
+          <ellipse cx="24" cy="6" rx="2" ry="4" />
+          <ellipse cx="8" cy="26" rx="2" ry="4" />
+          <ellipse cx="24" cy="26" rx="2" ry="4" />
+          <line x1="11" y1="12" x2="21" y2="12" />
+          <line x1="11" y1="16" x2="21" y2="16" />
+          <line x1="11" y1="20" x2="19" y2="20" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="title-card">
+      <p class="kicker">Act the First</p>
+      <h2 class="fraktur">The Greenwood</h2>
+      <p class="lede">A greedy prince has taken England. Robin and his Merry Men (and women) are fighting back from the trees.</p>
+    </div>
+
+    <div class="scroll-cue">
+      <span>scroll</span>
+      <span class="arrow">&darr;</span>
+    </div>
+  </section>
+
+  <section class="scene tavern" id="tavern">
+    <div class="tavern-inner">
+      <p class="kicker">Act the Second</p>
+      <h2 class="fraktur">The Blue Boar Inn</h2>
+      <p class="lede">Hinges groan. A fiddle. Pewter on oak. Little John, Friar Tuck, and Maid Marian in the firelight.</p>
+      <p class="note">Ken Ludwig&rsquo;s <em>Sherwood: The Adventures of Robin Hood</em>. Rollicking, inventive, swashbuckling.</p>
+    </div>
+  </section>
+
+  <section class="scene castle" id="castle">
+    <div class="castle-inner">
+      <p class="kicker">Act the Third</p>
+      <h2 class="fraktur">Nottingham Keep</h2>
+      <p class="lede">Banners snap on stone. Hooves in the yard. The sheriff walks the parapet, and somewhere below, an archer waits in the dark.</p>
+      <p class="note">A greedy prince, a spiteful sheriff, and the odds, as always, against the outlaws.</p>
+    </div>
+  </section>
+
+  <section class="scene programme" id="programme">
+    <div class="tavern-inner">
+      <p class="kicker">The Programme</p>
+      <h2 class="fraktur">Performances</h2>
+      <p class="lede">
+        <time datetime="2026-05-21">May 21</time> to <time datetime="2026-06-12">June 12, 2026</time>
+      </p>
+      <dl class="programme-list">
+        <dt>Thursdays to Saturdays</dt><dd>7:30 PM</dd>
+        <dt>Sundays</dt><dd>2:00 PM</dd>
+        <dt>General Admission</dt><dd>$14</dd>
+        <dt>Youth &amp; Seniors</dt><dd>$12</dd>
+      </dl>
+      <address class="venue">
+        Second Stage Theatre<br>
+        2730 Wetmore Ave, Everett WA 98201
+      </address>
+      <p class="note">
+        <a href="../Sherwood">&larr; Back to the Playbill</a>
+      </p>
+    </div>
+  </section>
+
+  <div id="flavor" aria-live="polite"></div>
+
+  <div id="flavor-card" class="flavor-card" role="dialog" aria-modal="true" aria-labelledby="flavor-title" aria-describedby="flavor-lore">
+    <div class="flavor-inner">
+      <button class="flavor-close" aria-label="Close">&times;</button>
+      <p class="flavor-scent"></p>
+      <h3 id="flavor-title" class="fraktur"></h3>
+      <p id="flavor-lore"></p>
+      <button class="flavor-go"></button>
+    </div>
+  </div>
+
+  <div id="veil" aria-hidden="true"></div>
+
+  <footer class="colophon">
+    <p><em>Sherwood</em> presented by arrangement with <a href="https://www.concordtheatricals.com" rel="external">Concord Theatricals</a> on behalf of Samuel French, Inc.</p>
+    <p>Music: <em>Celtic Impulse</em> by Kevin MacLeod &middot; incompetech.com &middot; CC BY 3.0</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/torch.js"></script>
+  <script src="js/scene.js"></script>
+</body>
+</html>
