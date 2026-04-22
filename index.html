@@ -396,39 +396,19 @@
             grid-column: 1 / -1;
             background: rgba(14, 13, 17, 0.72);
             border: 1.5px solid var(--sun);
-            padding: 2rem;
+            padding: 2rem 2.2rem 2.2rem;
             box-shadow: 10px 10px 0 var(--teal);
             transform: rotate(-0.6deg);
             backdrop-filter: blur(8px);
             color: var(--cream);
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
-            gap: 1.8rem;
-            align-items: center;
         }
         .music:hover { transform: translate(-2px, -3px) rotate(-1deg); box-shadow: 14px 14px 0 var(--teal); }
         .music h2 { color: var(--sun); font-size: 2.2rem; margin-bottom: 0.8rem; }
         .music-text p {
             font-family: 'Fraunces', serif;
-            font-size: 1.12rem;
+            font-size: 1.15rem;
             line-height: 1.6;
             color: var(--cream);
-        }
-        .music-embed {
-            border: 2px solid var(--cream);
-            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.45);
-            background: #1a1820;
-            overflow: hidden;
-        }
-        .music-embed iframe {
-            display: block;
-            width: 100%;
-            min-height: 152px;
-            border: 0;
-        }
-        @media (max-width: 700px) {
-            .music { grid-template-columns: 1fr; }
-            .music-text { text-align: center; }
         }
 
         /* Color swatch */
@@ -632,15 +612,6 @@
                 <div class="music-text">
                     <h2>What's playing</h2>
                     <p>My ear comes from my dad. He played everything, early. Mannheim Steamroller, synth, Yanni, hymns, classical, Christian rock, classic oldies, Neil Diamond. Ray Lynch came on my 13th birthday. Still my favorite listen.</p>
-                </div>
-                <div class="music-embed">
-                    <iframe
-                        src="https://open.spotify.com/embed/track/2THDVIVytLuGX7S7UghuC1?utm_source=generator"
-                        width="100%" height="152"
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        allowfullscreen
-                        loading="lazy"
-                        title="Celestial Soda Pop by Ray Lynch on Spotify"></iframe>
                 </div>
             </article>
 
