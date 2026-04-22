@@ -3,7 +3,510 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babbled Brooke</title>
+    <title>Babbled Brooke &middot; EvCC Graph 130</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400;700&family=Fraunces:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #267b72;
+            --teal-dark: #1a554f;
+            --teal-light: #c5e5e1;
+            --cream: #f5efdf;
+            --ink: #14110e;
+            --coral: #ff6b5a;
+            --sun: #ffd35c;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { min-height: 100vh; }
+        body {
+            color: var(--cream);
+            font-family: 'Fraunces', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.6;
+            padding: 2.5rem 1.2rem 4rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background art + dark overlay for readability */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                url("bg.jpg") center center / cover no-repeat,
+                linear-gradient(180deg, #1a1820 0%, #0e0d11 100%);
+            z-index: -2;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.72) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        main { max-width: 58rem; margin: 0 auto; position: relative; z-index: 1; }
+
+        /* Gate overlay for audio autoplay */
+        #gate {
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            display: grid;
+            place-items: center;
+            background: rgba(14, 13, 17, 0.75);
+            backdrop-filter: blur(8px);
+            transition: opacity 1s ease;
+            text-align: center;
+        }
+        #gate.hidden { opacity: 0; pointer-events: none; }
+        #gate p {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        #gate button {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.06em;
+            padding: 1rem 2.4rem;
+            background: transparent;
+            color: var(--cream);
+            border: 2px solid var(--cream);
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
+        }
+        #gate button:hover {
+            background: var(--coral);
+            border-color: var(--coral);
+            color: var(--ink);
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+        .hello {
+            display: inline-block;
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            color: var(--coral);
+            transform: rotate(-3deg);
+            margin-bottom: 0.4rem;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.55);
+        }
+        h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3.2rem, 11vw, 7.5rem);
+            color: var(--cream);
+            line-height: 0.92;
+            letter-spacing: -0.025em;
+            text-transform: lowercase;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+        h1 .and {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 700;
+            color: var(--coral);
+            text-transform: none;
+        }
+        .blurb {
+            max-width: 36rem;
+            margin: 1.8rem auto 0;
+            font-size: 1.12rem;
+            line-height: 1.6;
+            color: var(--cream);
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+            opacity: 0.96;
+        }
+
+        /* Why Babbled Brooke */
+        .why-block {
+            margin: 2rem 0 0;
+            padding: 2rem 2rem 2.2rem;
+            background: rgba(14, 13, 17, 0.72);
+            border: 1.5px solid var(--coral);
+            box-shadow: 10px 10px 0 var(--sun);
+            backdrop-filter: blur(8px);
+            transform: rotate(-0.5deg);
+            color: var(--cream);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .why-block:hover { transform: translate(-2px, -3px) rotate(-0.9deg); box-shadow: 14px 14px 0 var(--sun); }
+        .why-block h2 {
+            color: var(--sun);
+            font-size: 2.3rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.05;
+        }
+        .why-block p {
+            font-family: 'Fraunces', serif;
+            font-size: 1.18rem;
+            line-height: 1.6;
+            color: var(--cream);
+        }
+        .why-block .babble {
+            color: var(--coral);
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2.5rem 0 0;
+        }
+        .card {
+            background: rgba(20, 17, 14, 0.68);
+            backdrop-filter: blur(10px);
+            padding: 1.6rem 1.6rem 1.7rem;
+            border: 1.5px solid rgba(245, 239, 223, 0.35);
+            box-shadow: 6px 6px 0 rgba(38, 123, 114, 0.85);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            position: relative;
+            color: var(--cream);
+        }
+        .card:hover, .card:focus-within {
+            transform: translate(-2px, -3px) rotate(-0.6deg);
+            box-shadow: 10px 10px 0 var(--teal);
+            border-color: var(--teal-light);
+        }
+        .card:nth-child(3n+2) {
+            box-shadow: 6px 6px 0 rgba(255, 107, 90, 0.85);
+            transform: rotate(1deg);
+        }
+        .card:nth-child(3n+2):hover {
+            box-shadow: 10px 10px 0 var(--coral);
+            transform: translate(-2px, -3px) rotate(1.5deg);
+        }
+        .card:nth-child(3n) {
+            box-shadow: 6px 6px 0 rgba(255, 211, 92, 0.85);
+            transform: rotate(-0.8deg);
+        }
+        .card:nth-child(3n):hover {
+            box-shadow: 10px 10px 0 var(--sun);
+            transform: translate(-2px, -3px) rotate(-1.3deg);
+        }
+
+        h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.9rem;
+            line-height: 1.1;
+            color: var(--sun);
+            margin-bottom: 0.4rem;
+        }
+        h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.7rem;
+            line-height: 1.1;
+            color: var(--sun);
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            font-size: 1.02rem;
+            margin-top: 0.3rem;
+            color: var(--cream);
+        }
+        .card p + p { margin-top: 0.5rem; }
+        .big {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 3.2rem;
+            line-height: 1;
+            color: var(--coral);
+            display: block;
+            margin: 0.4rem 0 0.3rem;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+        }
+        .pursuing-label {
+            font-family: 'Archivo Black', sans-serif;
+            color: var(--teal-light);
+            font-size: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+        .aside {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: var(--sun);
+            margin-top: 0.8rem !important;
+            line-height: 1.2;
+        }
+        .aside em { color: var(--coral); font-style: italic; font-weight: 700; }
+
+        /* Artist callout */
+        .artist {
+            grid-column: 1 / -1;
+            background: rgba(38, 123, 114, 0.82);
+            color: var(--cream);
+            padding: 2.2rem 2rem 2.3rem;
+            box-shadow: 10px 10px 0 var(--coral);
+            transform: rotate(-0.4deg);
+            border: 1.5px solid var(--teal-light);
+            backdrop-filter: blur(6px);
+        }
+        .artist:hover {
+            transform: translate(-2px, -3px) rotate(-0.8deg);
+            box-shadow: 14px 14px 0 var(--coral);
+        }
+        .artist h2 { color: var(--sun); font-size: 2.2rem; }
+        .artist p {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.55;
+            color: var(--cream);
+        }
+        .artist strong { color: var(--sun); font-style: normal; }
+        .artist::before {
+            content: "\201C";
+            position: absolute;
+            top: -1.6rem; left: 1rem;
+            font-family: 'Fraunces', serif;
+            font-size: 7rem;
+            color: var(--coral);
+            line-height: 1;
+            pointer-events: none;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
+        }
+        .saville-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.7rem;
+            margin-top: 1.4rem;
+        }
+        .saville-gallery figure {
+            margin: 0;
+            overflow: hidden;
+            border: 1.5px solid var(--cream);
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.45);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 1 / 1;
+        }
+        .saville-gallery figure:hover {
+            transform: translate(-2px, -2px) rotate(-1deg);
+            box-shadow: 6px 6px 0 var(--sun);
+            z-index: 2;
+        }
+        .saville-gallery figure:nth-child(even):hover { transform: translate(-2px, -2px) rotate(1.2deg); box-shadow: 6px 6px 0 var(--coral); }
+        .saville-gallery img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .saville-gallery figure:hover img { transform: scale(1.06); }
+        .saville-credit {
+            margin-top: 1rem;
+            font-size: 0.88rem;
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            color: var(--cream);
+            opacity: 0.85;
+        }
+        .saville-credit a { color: var(--sun); }
+        @media (max-width: 520px) {
+            .saville-gallery { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* "What I'm making" feature card */
+        .making {
+            grid-column: 1 / -1;
+            background: rgba(14, 13, 17, 0.72);
+            border: 1.5px solid var(--coral);
+            padding: 2rem;
+            box-shadow: 10px 10px 0 var(--sun);
+            transform: rotate(0.5deg);
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: 1.8rem;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            color: var(--cream);
+        }
+        .making:hover { transform: translate(-2px, -3px) rotate(0.9deg); box-shadow: 14px 14px 0 var(--sun); }
+        .my-art {
+            margin: 0;
+            border: 2px solid var(--cream);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.45);
+            overflow: hidden;
+            aspect-ratio: 2 / 3;
+            background: #1a1820;
+        }
+        .my-art img {
+            display: block;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .making-text h2 { color: var(--coral); font-size: 2.2rem; margin-bottom: 0.8rem; }
+        .making-text p {
+            font-family: 'Fraunces', serif;
+            font-size: 1.15rem;
+            line-height: 1.55;
+            color: var(--cream);
+        }
+        .making-text p + p { margin-top: 0.7rem; }
+        .making-text .lede {
+            font-style: italic;
+            color: var(--sun);
+            font-size: 1.08rem;
+        }
+        @media (max-width: 700px) {
+            .making { grid-template-columns: 1fr; }
+            .making-text { text-align: center; }
+        }
+
+        /* "What's playing" block */
+        .music {
+            grid-column: 1 / -1;
+            background: rgba(14, 13, 17, 0.72);
+            border: 1.5px solid var(--sun);
+            padding: 2rem;
+            box-shadow: 10px 10px 0 var(--teal);
+            transform: rotate(-0.6deg);
+            backdrop-filter: blur(8px);
+            color: var(--cream);
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+            gap: 1.8rem;
+            align-items: center;
+        }
+        .music:hover { transform: translate(-2px, -3px) rotate(-1deg); box-shadow: 14px 14px 0 var(--teal); }
+        .music h2 { color: var(--sun); font-size: 2.2rem; margin-bottom: 0.8rem; }
+        .music-text p {
+            font-family: 'Fraunces', serif;
+            font-size: 1.12rem;
+            line-height: 1.6;
+            color: var(--cream);
+        }
+        .music-embed {
+            border: 2px solid var(--cream);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.45);
+            background: #1a1820;
+            overflow: hidden;
+        }
+        .music-embed iframe {
+            display: block;
+            width: 100%;
+            min-height: 152px;
+            border: 0;
+        }
+        @media (max-width: 700px) {
+            .music { grid-template-columns: 1fr; }
+            .music-text { text-align: center; }
+        }
+
+        /* Color swatch */
+        .color-row {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .swatch {
+            width: 84px; height: 84px;
+            background: var(--teal);
+            border: 2px solid var(--cream);
+            box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.25), 3px 3px 0 rgba(0, 0, 0, 0.4);
+            animation: swatch-wiggle 3.5s ease-in-out infinite;
+        }
+        @keyframes swatch-wiggle {
+            0%, 100% { transform: rotate(-4deg); }
+            50%      { transform: rotate(4deg) scale(1.04); }
+        }
+        .hex {
+            font-family: 'Archivo Black', sans-serif;
+            color: var(--teal-light);
+            font-size: 1.3rem;
+            letter-spacing: 0.04em;
+            background: rgba(38, 123, 114, 0.5);
+            padding: 0.15rem 0.5rem;
+            display: inline-block;
+            border: 1px solid var(--teal-light);
+        }
+
+        /* Signature */
+        .sig {
+            text-align: center;
+            margin-top: 3.5rem;
+            padding: 1.5rem;
+        }
+        .sig .name {
+            font-family: 'Caveat', cursive;
+            font-size: 2.8rem;
+            color: var(--sun);
+            display: inline-block;
+            transform: rotate(-3deg);
+            border-bottom: 3px solid var(--coral);
+            padding: 0 0.6rem 0.2rem;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.55);
+        }
+        .sig small {
+            display: block;
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--cream);
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Footer: colophon / credits */
+        .colophon {
+            margin: 2rem auto 0;
+            max-width: 54rem;
+            padding: 1.4rem 1.5rem;
+            background: rgba(14, 13, 17, 0.55);
+            border: 1px solid rgba(245, 239, 223, 0.25);
+            text-align: center;
+            backdrop-filter: blur(6px);
+        }
+        .colophon p {
+            font-family: 'Fraunces', serif;
+            font-size: 0.88rem;
+            font-style: italic;
+            color: var(--cream);
+            opacity: 0.85;
+            line-height: 1.55;
+            margin: 0.25rem 0;
+        }
+        .colophon .stack {
+            font-family: 'Archivo Black', sans-serif;
+            font-style: normal;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: var(--sun);
+            opacity: 1;
+        }
+        .colophon a { color: var(--sun); text-decoration-color: var(--coral); }
+
+        a {
+            color: var(--sun);
+            text-decoration: underline wavy var(--coral);
+            text-underline-offset: 4px;
+        }
+        a:hover { background: var(--sun); color: var(--ink); text-decoration-color: var(--ink); }
+        em { color: var(--sun); font-style: italic; }
+        strong { color: var(--cream); }
+
+        @media (max-width: 520px) {
+            .cards { grid-template-columns: 1fr; }
+            .artist::before { font-size: 5rem; top: -0.8rem; }
+        }
+    </style>
 </head>
 <body>
     <h1>Babbled Brooke and this is my first webpage put together for college web design and coding class. I have made several webpages outside of class.  I am eager to learn in depth web design.</h1>
