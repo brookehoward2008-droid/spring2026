@@ -509,16 +509,135 @@
     </style>
 </head>
 <body>
-    <h1>Babbled Brooke and this is my first webpage put together for college web design and coding class. I have made several webpages outside of class.  I am eager to learn in depth web design.</h1>
-    <h2>School and Course</h2>
-  <p> Everett CC Graph 130</p>
-<h3>How many quarters have you attended EvCC?</h3>
-<p>I have attended 3 quarters and into my fourth</p>
-<h3 style="font-size:25px;color: #2f6a02;">What degree/certificate program are you pursuing</h3>
-<p style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">I am pursuing a degree in Graphic Design.</p>
-<h3>What artist/designer inspires you? Why?</h3>
-<p style="color: blueviolet;"> The artist that is my favorite currently is Jenny Seville. Her work is very raw and emotionally powerful. I love that she embraces imperfection both in her own work and in the people she studies. </p>
-<h3>What is your favorite color?  (Please, use a hex code and style your answer with that color.)</h3>
-<p style="color: #267b72;">My favorite color is a teal green with gray blue, and the hex code for that is #267b72.</p>
+
+    <div id="gate">
+        <div>
+            <p>a little surrealism ahead</p>
+            <button id="enter-btn">Step inside</button>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <p class="hello">hi, I'm</p>
+            <h1>babbled <span class="and">&amp;</span> brooke</h1>
+            <p class="blurb">
+                My first webpage, built for Everett CC's web design and coding class.
+                I've put a few webpages together outside of class too. I'm here to learn
+                the craft all the way down.
+            </p>
+        </section>
+
+        <section class="why-block">
+            <h2>Why Babbled Brooke</h2>
+            <p>My mind is always thinking. The non-stop <span class="babble">BABBLE</span> used to madden me. I've learned to embrace it and go with the flow. Late nights. A lot of music. Always searching for inspiration.</p>
+        </section>
+
+        <section class="cards">
+
+            <article class="card">
+                <h2>School &amp; Course</h2>
+                <p>Everett Community College</p>
+                <p><em>Graph 130 &middot; Web Design</em></p>
+            </article>
+
+            <article class="card">
+                <h3>Quarters at EvCC</h3>
+                <span class="big">3.5</span>
+                <p>Three full quarters, and I'm deep into my fourth.</p>
+            </article>
+
+            <article class="card">
+                <h3>What I'm pursuing</h3>
+                <p>A degree in</p>
+                <p><span class="pursuing-label">Graphic Design.</span></p>
+                <p class="aside">Art therapy too, one day.</p>
+            </article>
+
+            <article class="card">
+                <h3>Favorite color</h3>
+                <div class="color-row">
+                    <div class="swatch" aria-hidden="true"></div>
+                    <div>
+                        <p>A teal green with gray-blue.</p>
+                        <p><span class="hex">#267B72</span></p>
+                        <p class="aside">One of <em>many</em> I love.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="card artist">
+                <h2>The artist who inspires me</h2>
+                <p>
+                    My favorite right now is <strong>Jenny Saville</strong>. Her work is raw
+                    and emotionally powerful. I love that she embraces imperfection, both in
+                    her own work and in the people she studies.
+                </p>
+                <div class="saville-gallery" aria-label="A selection of Jenny Saville paintings from the National Portrait Gallery exhibition">
+                    <figure><img src="saville/saville-1.jpg" alt="Jenny Saville painting" loading="lazy"></figure>
+                    <figure><img src="saville/saville-2.jpg" alt="Jenny Saville painting" loading="lazy"></figure>
+                    <figure><img src="saville/saville-3.jpg" alt="Jenny Saville painting" loading="lazy"></figure>
+                    <figure><img src="saville/saville-4.jpg" alt="Jenny Saville painting" loading="lazy"></figure>
+                    <figure><img src="saville/saville-5.jpg" alt="Jenny Saville painting" loading="lazy"></figure>
+                    <figure><img src="saville/saville-6.jpg" alt="Jenny Saville painting" loading="lazy"></figure>
+                </div>
+                <p class="saville-credit">
+                    Photographs from <a href="https://saltertonartsreview.com/2025/07/jenny-saville-the-anatomy-of-painting-national-portrait-gallery-london/" target="_blank" rel="noopener">Salterton Arts Review</a> &middot; <em>The Anatomy of Painting</em>, National Portrait Gallery, London.
+                </p>
+            </article>
+
+            <article class="card making">
+                <figure class="my-art">
+                    <img src="my-art.jpg" alt="A surreal collage: a figure in a plum suit with a television for a head, tangled line-drawn faces on the screen, standing on dark earth. Small cloud-legged figures on either side. An inverted staircase spills from a lantern-like shape above, into a pastel sky.">
+                </figure>
+                <div class="making-text">
+                    <h2>What I'm making</h2>
+                    <p class="lede">I am always creating. Here is one.</p>
+                    <p>Abstract, surreal, emotional, colorful, layered. TV-head, a crowd of small selves at the edges, a staircase that goes somewhere I can't see yet. Saville's permission to be imperfect lives in mine.</p>
+                </div>
+            </article>
+
+            <article class="card music">
+                <div class="music-text">
+                    <h2>What's playing</h2>
+                    <p>My ear comes from my dad. He played everything, early. Mannheim Steamroller, synth, Yanni, hymns, classical, Christian rock, classic oldies, Neil Diamond. Ray Lynch came on my 13th birthday. Still my favorite listen.</p>
+                </div>
+                <div class="music-embed">
+                    <iframe
+                        src="https://open.spotify.com/embed/track/2THDVIVytLuGX7S7UghuC1?utm_source=generator"
+                        width="100%" height="152"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy"
+                        title="Celestial Soda Pop by Ray Lynch on Spotify"></iframe>
+                </div>
+            </article>
+
+        </section>
+
+        <p class="sig">
+            <span class="name">Brooke</span>
+            <small>Babbled Brooke &middot; Spring 2026</small>
+        </p>
+
+        <footer class="colophon">
+            <p class="stack">Built with HTML &middot; CSS &middot; JavaScript</p>
+            <p>Music: <em>Celestial Soda Pop</em> by Ray Lynch &middot; from <em>Deep Breakfast</em>, 1984</p>
+            <p>Jenny Saville exhibition photographs &middot; <a href="https://saltertonartsreview.com/2025/07/jenny-saville-the-anatomy-of-painting-national-portrait-gallery-london/" target="_blank" rel="noopener">Salterton Arts Review</a></p>
+        </footer>
+    </main>
+
+    <script>
+        (function () {
+            const gate = document.getElementById('gate');
+            const enterBtn = document.getElementById('enter-btn');
+            function enter() {
+                gate.classList.add('hidden');
+                setTimeout(() => gate.remove(), 1100);
+            }
+            enterBtn.addEventListener('click', enter);
+            gate.addEventListener('click', (e) => { if (e.target === gate) enter(); });
+        })();
+    </script>
 </body>
 </html>
