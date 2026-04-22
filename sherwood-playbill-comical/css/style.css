@@ -357,6 +357,109 @@ html, body {
   outline: none;
 }
 
+/* CTA action overlay: each button gets a mini-cinematic */
+#action-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 49;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+#action-overlay.show { opacity: 1; }
+
+/* "Join the feast!" */
+.cheer-text {
+  font-family: var(--henny);
+  font-size: clamp(4rem, 14vw, 11rem);
+  color: var(--apple);
+  text-shadow: 5px 5px 0 var(--sun), 10px 10px 0 var(--ink);
+  animation: huzzah 1.2s cubic-bezier(.4,1.6,.5,1);
+  position: relative;
+  z-index: 2;
+}
+@keyframes huzzah {
+  0%   { transform: scale(0) rotate(-40deg); opacity: 0; }
+  35%  { transform: scale(1.35) rotate(8deg); opacity: 1; }
+  65%  { transform: scale(0.95) rotate(-4deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+}
+.tankard {
+  position: absolute;
+  font-size: 3.2rem;
+  animation: flyup 1.3s ease-out;
+  bottom: 0;
+  z-index: 1;
+}
+@keyframes flyup {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+}
+
+/* "Laugh at the Sheriff" */
+.ha {
+  position: absolute;
+  font-family: var(--henny);
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  color: var(--apple);
+  text-shadow: 3px 3px 0 var(--ink);
+  animation: ha-bounce 1.1s ease-out forwards;
+  opacity: 0;
+}
+@keyframes ha-bounce {
+  0%   { transform: translateY(30px) scale(0) rotate(-20deg); opacity: 0; }
+  40%  { transform: translateY(-20px) scale(1.3) rotate(8deg); opacity: 1; }
+  80%  { transform: translateY(20px) scale(1) rotate(-3deg); opacity: 1; }
+  100% { transform: translateY(80px) scale(0.7) rotate(0deg); opacity: 0; }
+}
+body.shaking { animation: shake 0.45s ease-in-out 2; }
+@keyframes shake {
+  0%,100% { transform: translate(0,0); }
+  20%  { transform: translate(-6px, 3px); }
+  40%  { transform: translate(6px, -3px); }
+  60%  { transform: translate(-4px, 2px); }
+  80%  { transform: translate(4px, -1px); }
+}
+
+/* "Read the playbill!" */
+.page-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(243, 233, 205, 0.2) 15%,
+    var(--cream) 35%,
+    #e6d5a8 50%,
+    var(--cream) 65%,
+    rgba(243, 233, 205, 0.2) 85%,
+    transparent 100%);
+  transform: translateX(-110%);
+  animation: sweep 1.2s cubic-bezier(.5,0,.5,1);
+  box-shadow: 4px 0 25px rgba(0,0,0,0.25);
+  z-index: 1;
+}
+@keyframes sweep {
+  0%   { transform: translateX(-110%); }
+  100% { transform: translateX(110%); }
+}
+.page-text {
+  position: relative;
+  z-index: 2;
+  font-family: var(--caveat);
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--wood);
+  font-style: italic;
+  animation: fade-in-out 1.2s ease;
+}
+@keyframes fade-in-out {
+  0%,100% { opacity: 0; }
+  30%,70% { opacity: 1; }
+}
+
 /* Transition veil (sunny flash) */
 #veil {
   position: fixed;

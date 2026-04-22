@@ -119,11 +119,120 @@
     if (e.key === "Escape" && card.classList.contains("show")) closeCard();
   });
 
-  // CTA button: close card, then crossfade to the target scene
+  // CTA button: close card, run a button-specific mini-cinematic, then crossfade.
+  const ACTION_MAP = { tavern: "cheer", castle: "laugh", programme: "pageturn" };
+  const overlay = document.getElementById("action-overlay");
+  let sfxCtx = null;
+  const getCtx = () => (sfxCtx = sfxCtx || new (window.AudioContext || window.webkitAudioContext)());
+
+  function playSfx(type) {
+    const ctx = getCtx();
+    const now = ctx.currentTime;
+    if (type === "cheer") {
+      const buf = ctx.createBuffer(1, ctx.sampleRate * 0.55, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length) * 0.35;
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      const f = ctx.createBiquadFilter();
+      f.type = "bandpass";
+      f.Q.value = 1.2;
+      f.frequency.setValueAtTime(350, now);
+      f.frequency.exponentialRampToValueAtTime(2400, now + 0.5);
+      src.connect(f).connect(ctx.destination);
+      src.start();
+    } else if (type === "laugh") {
+      [480, 420, 370, 330].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "triangle";
+        osc.frequency.value = freq;
+        const t = now + i * 0.14;
+        gain.gain.setValueAtTime(0, t);
+        gain.gain.linearRampToValueAtTime(0.28, t + 0.02);
+        gain.gain.linearRampToValueAtTime(0, t + 0.11);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.14);
+      });
+    } else if (type === "pageturn") {
+      const buf = ctx.createBuffer(1, ctx.sampleRate * 0.35, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < d.length; i++) {
+        const t = i / d.length;
+        d[i] = (Math.random() * 2 - 1) * (0.4 * (1 - t));
+      }
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      const f = ctx.createBiquadFilter();
+      f.type = "highpass";
+      f.frequency.value = 1400;
+      src.connect(f).connect(ctx.destination);
+      src.start();
+    }
+  }
+
+  function performAction(type, cb) {
+    overlay.className = "show";
+    overlay.innerHTML = "";
+
+    if (type === "cheer") {
+      const headline = document.createElement("div");
+      headline.className = "cheer-text";
+      headline.textContent = "HUZZAH!";
+      overlay.appendChild(headline);
+      for (let i = 0; i < 9; i++) {
+        const t = document.createElement("span");
+        t.className = "tankard";
+        t.textContent = "\uD83C\uDF7A"; // beer mug
+        t.style.left = 5 + i * 10.5 + "%";
+        t.style.animationDelay = (i * 0.04) + "s";
+        overlay.appendChild(t);
+      }
+    } else if (type === "laugh") {
+      document.body.classList.add("shaking");
+      const positions = [
+        [12, 28], [78, 22], [30, 66], [66, 70], [46, 40],
+        [20, 54], [82, 58], [56, 24], [38, 80]
+      ];
+      positions.forEach(([x, y], i) => {
+        const ha = document.createElement("div");
+        ha.className = "ha";
+        ha.textContent = i % 2 ? "HA!" : "HA HA!";
+        ha.style.left = x + "%";
+        ha.style.top = y + "%";
+        ha.style.animationDelay = (i * 0.07) + "s";
+        overlay.appendChild(ha);
+      });
+      setTimeout(() => document.body.classList.remove("shaking"), 950);
+    } else if (type === "pageturn") {
+      const sweep = document.createElement("div");
+      sweep.className = "page-sweep";
+      overlay.appendChild(sweep);
+      const text = document.createElement("div");
+      text.className = "page-text";
+      text.textContent = "Turn the page...";
+      overlay.appendChild(text);
+    }
+
+    playSfx(type);
+
+    setTimeout(() => {
+      overlay.classList.remove("show");
+      overlay.innerHTML = "";
+      setTimeout(cb, 220);
+    }, 1050);
+  }
+
   cardGo.addEventListener("click", () => {
     const target = cardGo.dataset.target;
+    const action = ACTION_MAP[target];
     closeCard();
-    setTimeout(() => transitionTo(target), 180);
+    if (action) {
+      setTimeout(() => performAction(action, () => transitionTo(target)), 160);
+    } else {
+      setTimeout(() => transitionTo(target), 180);
+    }
   });
 
   // Volume dips when the user enters the tavern
