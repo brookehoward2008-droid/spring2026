@@ -88,6 +88,30 @@
             border-color: var(--coral);
             color: var(--ink);
         }
+        .gate-hint {
+            margin-top: 1rem !important;
+            font-family: 'Caveat', cursive !important;
+            font-size: 1.1rem !important;
+            color: var(--sun) !important;
+            opacity: 0.85;
+        }
+
+        /* Audio toggle */
+        #audio-toggle {
+            position: fixed;
+            right: 1.2rem;
+            bottom: 1.2rem;
+            z-index: 20;
+            width: 3rem; height: 3rem;
+            border-radius: 50%;
+            background: rgba(14, 13, 17, 0.6);
+            color: var(--cream);
+            border: 1.5px solid var(--cream);
+            font-size: 1.4rem;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+        }
+        #audio-toggle:hover { background: var(--coral); border-color: var(--coral); color: var(--ink); }
 
         /* Hero */
         .hero {
@@ -514,8 +538,15 @@
         <div>
             <p>a little surrealism ahead</p>
             <button id="enter-btn">Step inside</button>
+            <p class="gate-hint">sound on, if you like</p>
         </div>
     </div>
+
+    <audio id="bgm" loop preload="auto">
+        <source src="celestial-soda-pop.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="audio-toggle" aria-label="Toggle sound" title="Toggle sound">&#9834;</button>
 
     <main>
         <section class="hero">
@@ -622,7 +653,7 @@
 
         <footer class="colophon">
             <p class="stack">Built with HTML &middot; CSS &middot; JavaScript</p>
-            <p>Music: <em>Celestial Soda Pop</em> by Ray Lynch &middot; from <em>Deep Breakfast</em>, 1984</p>
+            <p>Music: <em>Celestial Soda Pop</em> by Ray Lynch &middot; from <em>Deep Breakfast</em>, 1984 &middot; free download at <a href="https://www.raylynch.com/free_mp3_downloads/" target="_blank" rel="noopener">raylynch.com</a></p>
             <p>Jenny Saville exhibition photographs &middot; <a href="https://saltertonartsreview.com/2025/07/jenny-saville-the-anatomy-of-painting-national-portrait-gallery-london/" target="_blank" rel="noopener">Salterton Arts Review</a></p>
         </footer>
     </main>
@@ -631,12 +662,28 @@
         (function () {
             const gate = document.getElementById('gate');
             const enterBtn = document.getElementById('enter-btn');
+            const audio = document.getElementById('bgm');
+            const toggle = document.getElementById('audio-toggle');
+
+            audio.volume = 0.45;
+
             function enter() {
                 gate.classList.add('hidden');
+                audio.play().catch(() => {});
                 setTimeout(() => gate.remove(), 1100);
             }
             enterBtn.addEventListener('click', enter);
             gate.addEventListener('click', (e) => { if (e.target === gate) enter(); });
+
+            toggle.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play().catch(() => {});
+                    toggle.innerHTML = '&#9835;';
+                } else {
+                    audio.pause();
+                    toggle.innerHTML = '&#9834;';
+                }
+            });
         })();
     </script>
 </body>
