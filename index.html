@@ -29,22 +29,23 @@
             overflow-x: hidden;
         }
 
-        /* Background art + dark overlay for readability */
-        body::before {
-            content: "";
+        /* Live matrix-rain background + readability overlay */
+        #matrix-bg {
             position: fixed;
             inset: 0;
-            background:
-                url("bg.jpg") center center / cover no-repeat,
-                linear-gradient(180deg, #1a1820 0%, #0e0d11 100%);
             z-index: -2;
+            background: #0a0810;
+            pointer-events: none;
+            display: block;
+            width: 100vw;
+            height: 100vh;
         }
         body::after {
             content: "";
             position: fixed;
             inset: 0;
             background:
-                radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.72) 100%);
+                radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.68) 100%);
             z-index: -1;
             pointer-events: none;
         }
@@ -514,6 +515,8 @@
 </head>
 <body>
 
+    <canvas id="matrix-bg"></canvas>
+
     <div id="gate">
         <div>
             <p>a little surrealism ahead</p>
@@ -630,16 +633,33 @@
     </main>
 
     <script>
+        /* Gate, audio, and matrix-rain audio-reactive background. */
         (function () {
             const gate = document.getElementById('gate');
             const enterBtn = document.getElementById('enter-btn');
             const audio = document.getElementById('bgm');
             const toggle = document.getElementById('audio-toggle');
-
             audio.volume = 0.45;
+
+            let audioCtx = null, analyser = null, freqData = null, sourceNode = null;
+            function hookAnalyser() {
+                if (sourceNode) return;
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    sourceNode = audioCtx.createMediaElementSource(audio);
+                    analyser = audioCtx.createAnalyser();
+                    analyser.fftSize = 128;
+                    analyser.smoothingTimeConstant = 0.75;
+                    sourceNode.connect(analyser);
+                    analyser.connect(audioCtx.destination);
+                    freqData = new Uint8Array(analyser.frequencyBinCount);
+                } catch (e) { console.warn('Audio analyser unavailable', e); }
+            }
 
             function enter() {
                 gate.classList.add('hidden');
+                hookAnalyser();
+                if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
                 audio.play().catch(() => {});
                 setTimeout(() => gate.remove(), 1100);
             }
@@ -648,6 +668,7 @@
 
             toggle.addEventListener('click', () => {
                 if (audio.paused) {
+                    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
                     audio.play().catch(() => {});
                     toggle.innerHTML = '&#9835;';
                 } else {
@@ -655,6 +676,69 @@
                     toggle.innerHTML = '&#9834;';
                 }
             });
+
+            /* Matrix-rain background */
+            const canvas = document.getElementById('matrix-bg');
+            const ctx = canvas.getContext('2d');
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const PALETTE = ['#267b72', '#3aa094', '#c5e5e1', '#ffd35c', '#ff6b5a', '#f5efdf'];
+            const CHARS = '01░▒▓♪♫|/\\-+=·•◌○◉✦';
+            let w = 0, h = 0, cols = 0, drops = [], colDepth = [];
+            const FS = 16;
+
+            function resize() {
+                w = Math.floor(window.innerWidth);
+                h = Math.floor(window.innerHeight);
+                canvas.width = Math.floor(w * dpr);
+                canvas.height = Math.floor(h * dpr);
+                canvas.style.width = w + 'px';
+                canvas.style.height = h + 'px';
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                cols = Math.floor(w / FS) + 1;
+                drops = new Array(cols).fill(0).map(() => Math.random() * -50);
+                colDepth = new Array(cols).fill(0).map(() => 0.6 + Math.random() * 0.4);
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            function frame() {
+                let intensity = 0.12;
+                if (analyser) {
+                    analyser.getByteFrequencyData(freqData);
+                    let sum = 0;
+                    for (let i = 0; i < freqData.length; i++) sum += freqData[i];
+                    intensity = Math.min(1, sum / freqData.length / 80);
+                }
+
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.fillStyle = 'rgba(10, 8, 16, ' + (0.08 + intensity * 0.05) + ')';
+                ctx.fillRect(0, 0, w, h);
+
+                ctx.font = FS + 'px "Courier New", monospace';
+                ctx.textBaseline = 'top';
+
+                for (let i = 0; i < cols; i++) {
+                    const x = i * FS;
+                    const y = drops[i] * FS;
+                    const ch = CHARS[(Math.floor(Math.random() * CHARS.length))];
+                    const color = PALETTE[(i + Math.floor(drops[i] / 4)) % PALETTE.length];
+                    ctx.fillStyle = color;
+                    ctx.globalAlpha = (0.35 + intensity * 0.55) * colDepth[i];
+                    ctx.fillText(ch, x, y);
+
+                    if (Math.random() < 0.04 + intensity * 0.12) {
+                        ctx.fillStyle = '#ffffff';
+                        ctx.globalAlpha = 0.85 * colDepth[i];
+                        ctx.fillText(ch, x, y - FS);
+                    }
+
+                    drops[i] += 0.35 + intensity * 1.1;
+                    if (drops[i] * FS > h && Math.random() > 0.975) drops[i] = -Math.random() * 20;
+                }
+                ctx.globalAlpha = 1;
+                requestAnimationFrame(frame);
+            }
+            frame();
         })();
     </script>
 </body>
