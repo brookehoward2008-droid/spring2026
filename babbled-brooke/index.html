@@ -293,16 +293,23 @@
             color: var(--cream);
         }
         .artist strong { color: var(--sun); font-style: normal; }
-        .artist::before {
-            content: "\201C";
+        .artist::before,
+        .artist::after {
             position: absolute;
-            top: -1.6rem; left: 1rem;
             font-family: 'Fraunces', serif;
             font-size: 7rem;
             color: var(--coral);
             line-height: 1;
             pointer-events: none;
             text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
+        }
+        .artist::before {
+            content: "\201C";
+            top: -1.6rem; left: 1rem;
+        }
+        .artist::after {
+            content: "\201D";
+            bottom: -3.5rem; right: 1rem;
         }
         .saville-gallery {
             display: grid;
