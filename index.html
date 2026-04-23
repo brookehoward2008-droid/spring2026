@@ -525,9 +525,7 @@
         </div>
     </div>
 
-    <audio id="bgm" loop preload="auto">
-        <source src="celestial-soda-pop.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bgm" preload="auto"></audio>
 
     <button id="audio-toggle" aria-label="Toggle sound" title="Toggle sound">&#9834;</button>
 
@@ -627,7 +625,7 @@
 
         <footer class="colophon">
             <p class="stack">Built with HTML &middot; CSS &middot; JavaScript</p>
-            <p>Music: <em>Celestial Soda Pop</em> by Ray Lynch &middot; from <em>Deep Breakfast</em>, 1984 &middot; <a href="https://www.raylynch.com/" target="_blank" rel="noopener">raylynch.com</a></p>
+            <p>Music: <em>Celestial Soda Pop</em> &amp; <em>Tiny Geometries</em> by Ray Lynch &middot; from <em>Deep Breakfast</em>, 1984 &middot; <a href="https://www.raylynch.com/" target="_blank" rel="noopener">raylynch.com</a></p>
             <p>Jenny Saville exhibition photographs &middot; <a href="https://saltertonartsreview.com/2025/07/jenny-saville-the-anatomy-of-painting-national-portrait-gallery-london/" target="_blank" rel="noopener">Salterton Arts Review</a></p>
         </footer>
     </main>
@@ -640,6 +638,23 @@
             const audio = document.getElementById('bgm');
             const toggle = document.getElementById('audio-toggle');
             audio.volume = 0.45;
+
+            /* Playlist: tracks cycle in order, loops at the end. */
+            const playlist = [
+                'celestial-soda-pop.mp3',
+                'tiny-geometries.mp3'
+            ];
+            let trackIndex = 0;
+            function loadTrack(i) {
+                audio.src = playlist[i];
+                audio.load();
+            }
+            loadTrack(0);
+            audio.addEventListener('ended', () => {
+                trackIndex = (trackIndex + 1) % playlist.length;
+                loadTrack(trackIndex);
+                audio.play().catch(() => {});
+            });
 
             let audioCtx = null, analyser = null, freqData = null, sourceNode = null;
             function hookAnalyser() {
@@ -711,7 +726,7 @@
                 }
 
                 ctx.globalCompositeOperation = 'source-over';
-                ctx.fillStyle = 'rgba(10, 8, 16, ' + (0.08 + intensity * 0.05) + ')';
+                ctx.fillStyle = 'rgba(10, 8, 16, ' + (0.045 + intensity * 0.025) + ')';
                 ctx.fillRect(0, 0, w, h);
 
                 ctx.font = FS + 'px "Courier New", monospace';
@@ -732,8 +747,8 @@
                         ctx.fillText(ch, x, y - FS);
                     }
 
-                    drops[i] += 0.35 + intensity * 1.1;
-                    if (drops[i] * FS > h && Math.random() > 0.975) drops[i] = -Math.random() * 20;
+                    drops[i] += 0.12 + intensity * 0.35;
+                    if (drops[i] * FS > h && Math.random() > 0.985) drops[i] = -Math.random() * 20;
                 }
                 ctx.globalAlpha = 1;
                 requestAnimationFrame(frame);
