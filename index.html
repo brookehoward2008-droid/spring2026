@@ -3,29 +3,196 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Brooke Chauntel &middot; Spring 2026</title>
-    <meta http-equiv="refresh" content="0; url=./babbled-brooke/">
-    <link rel="canonical" href="./babbled-brooke/">
+    <title>Brooke Chauntel &middot; Spring 2026 &middot; EvCC Graph 130</title>
+    <meta name="description" content="Portfolio of class work and portfolio projects by Brooke Chauntel, Graph 130 web design at Everett Community College, Spring 2026.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400;700&family=Fraunces:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Georgia, serif;
-            background: #0a0810;
-            color: #f5efdf;
-            margin: 0;
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            text-align: center;
-            padding: 2rem;
+        :root {
+            --teal: #267b72;
+            --teal-dark: #1a554f;
+            --teal-light: #c5e5e1;
+            --cream: #f5efdf;
+            --ink: #14110e;
+            --coral: #ff6b5a;
+            --sun: #ffd35c;
         }
-        a { color: #ffd35c; }
-        .note { color: #c5e5e1; font-style: italic; margin-top: 0.5rem; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #0a0810;
+            color: var(--cream);
+            font-family: 'Fraunces', Georgia, serif;
+            min-height: 100vh;
+            padding: 3rem 1.2rem 4rem;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(38,123,114,0.20) 0, transparent 360px),
+                radial-gradient(circle at 85% 75%, rgba(255,107,90,0.18) 0, transparent 380px),
+                radial-gradient(circle at 55% 95%, rgba(255,211,92,0.15) 0, transparent 300px);
+        }
+        main { max-width: 58rem; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 3rem; }
+        .hello {
+            display: inline-block;
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: var(--coral);
+            transform: rotate(-3deg);
+            margin-bottom: 0.3rem;
+        }
+        h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(3rem, 9vw, 5.6rem);
+            color: var(--cream);
+            line-height: 0.95;
+            letter-spacing: -0.025em;
+            text-transform: lowercase;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.6);
+        }
+        h1 span.teal { color: var(--teal); }
+        .tag {
+            margin-top: 0.9rem;
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            color: var(--teal-light);
+            font-size: 1.05rem;
+        }
+
+        h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: var(--sun);
+            margin: 2.5rem 0 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.6rem;
+        }
+        a.tile {
+            display: block;
+            padding: 1.4rem 1.5rem;
+            background: rgba(14,13,17,0.72);
+            border: 1.5px solid rgba(245,239,223,0.25);
+            box-shadow: 6px 6px 0 var(--teal);
+            color: var(--cream);
+            text-decoration: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            backdrop-filter: blur(6px);
+        }
+        a.tile:hover {
+            transform: translate(-2px, -3px) rotate(-0.6deg);
+            box-shadow: 10px 10px 0 var(--teal);
+            border-color: var(--teal-light);
+        }
+        a.tile:nth-child(3n+2) { box-shadow: 6px 6px 0 var(--coral); transform: rotate(1deg); }
+        a.tile:nth-child(3n+2):hover { box-shadow: 10px 10px 0 var(--coral); transform: translate(-2px,-3px) rotate(1.5deg); }
+        a.tile:nth-child(3n) { box-shadow: 6px 6px 0 var(--sun); transform: rotate(-0.8deg); }
+        a.tile:nth-child(3n):hover { box-shadow: 10px 10px 0 var(--sun); transform: translate(-2px,-3px) rotate(-1.3deg); }
+
+        a.tile h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.01em;
+            color: var(--teal-light);
+            margin-bottom: 0.4rem;
+        }
+        a.tile p {
+            font-size: 0.98rem;
+            line-height: 1.5;
+            color: var(--cream);
+        }
+        a.tile .kicker {
+            display: block;
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: var(--coral);
+            margin-bottom: 0.2rem;
+        }
+
+        footer {
+            margin-top: 3.5rem;
+            text-align: center;
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--teal-light);
+            opacity: 0.8;
+        }
+        footer a { color: var(--sun); }
+
+        @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div>
-        <p>Redirecting to <a href="./babbled-brooke/">Babbled Brooke</a>&hellip;</p>
-        <p class="note">If it doesn't happen automatically, click the link.</p>
-    </div>
+
+    <main>
+        <header>
+            <p class="hello">hi, I'm</p>
+            <h1>brooke <span class="teal">chauntel</span></h1>
+            <p class="tag">Spring 2026 &middot; Everett Community College &middot; Graph 130 &middot; Web Design</p>
+        </header>
+
+        <section>
+            <h2>Class assignments</h2>
+            <div class="grid">
+                <a class="tile" href="babbled-brooke/">
+                    <span class="kicker">Personal homepage</span>
+                    <h3>Babbled Brooke</h3>
+                    <p>School, inspiration, favorite color, and the work I'm making right now.</p>
+                </a>
+                <a class="tile" href="Sherwood">
+                    <span class="kicker">HTML markup</span>
+                    <h3>Sherwood: The Adventures of Robin Hood</h3>
+                    <p>Semantic markup of a Village Theatre playbill.</p>
+                </a>
+                <a class="tile" href="history%20of%20the%20internet">
+                    <span class="kicker">HTML timeline</span>
+                    <h3>History of the Internet</h3>
+                    <p>From Eisenhower and Sputnik to HTML5.</p>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h2>Portfolio &amp; extras</h2>
+            <div class="grid">
+                <a class="tile" href="sherwood-playbill/">
+                    <span class="kicker">Immersive</span>
+                    <h3>Sherwood (serious)</h3>
+                    <p>Torchlit forest scene with parallax, ambient score, and clickable hotspots.</p>
+                </a>
+                <a class="tile" href="sherwood-playbill-comical/">
+                    <span class="kicker">Immersive</span>
+                    <h3>Sherwood (merry)</h3>
+                    <p>Bright daylight playlist with bouncy SVG icons and button mini-cinematics.</p>
+                </a>
+                <a class="tile" href="Sherwood-Playbill.pdf">
+                    <span class="kicker">Print</span>
+                    <h3>Sherwood Playbill PDF</h3>
+                    <p>One-page parchment playbill with clickable live links.</p>
+                </a>
+                <a class="tile" href="sherwood.html">
+                    <span class="kicker">Rendered HTML</span>
+                    <h3>Sherwood (rendered)</h3>
+                    <p>The same semantic markup, served at a <code>.html</code> URL for direct browser viewing.</p>
+                </a>
+                <a class="tile" href="sherwood-archive/">
+                    <span class="kicker">Archive</span>
+                    <h3>Sherwood (earlier draft)</h3>
+                    <p>An earlier photographic version of the playbill, kept for reference.</p>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>Built with HTML, CSS, and vanilla JavaScript.</p>
+            <p>Source on <a href="https://github.com/brookehoward2008-droid/spring2026">GitHub</a>.</p>
+        </footer>
+    </main>
+
 </body>
 </html>
