@@ -23,18 +23,18 @@
     <p>ARPA (Advanced Research Project Agency), later renamed DARPA (Defense Advanced Research Projects Agency), was the U.S. agency that funded the earliest research leading to the internet.</p>
     <img src="4-arpanet2.gif" alt="ARPANET network diagram">
     <img src="5-early-arpanet.jpg" alt="Early ARPANET">
-    <img src="6-apranet-82.jpg" alt="ARPANET in 1982">
+    <img src="6-arpanet-82.jpg" alt="ARPANET in 1982">
 
     <h2>J.C.R. Licklider and the "Intergalactic Computer Network"</h2>
     <blockquote>
-        <p>"The Internet as we know it really got started in the early 1960s. That was when J.C.R. Licklider, a computer scientist with technology company Bolt, Beranek and Newman (BBN), formulated a few unique ideas about global networking in a series of memos, describing an 'Intergalactic Computer Network.'</p>
-        <p>His idea: link computers together across the globe; and anybody near a computer could share information. As it turns out, Licklider had the right idea at the right time. The Cold War had the United States searching for a communication network that could survive a nuclear attack."</p>
+        <p>"The Internet as we know it really got started in the early 1960s. That was when J.C.R. Licklider, a computer scientist with technology company Bolt, Beranek and Newman (BBN), formulated a visionary concept for the future of computing.</p>
+        <p>His idea: link computers together across the globe; and anybody near a computer could share information. As it turns out, Licklider had the right idea at the right time. The Cold War had created a need for better communication and information sharing among research institutions.</p>
         <p>Source: <a href="https://www.livescience.com/42604-who-invented-the-internet.html">livescience.com</a></p>
     </blockquote>
 
     <h2>Tim Berners-Lee and HTML</h2>
     <p>Tim Berners-Lee developed the first HTML (Hypertext Markup Language) in 1989.</p>
-    <p>Published text has always been marked up so that the author and publisher would be able to synchronize and lay out a publication the way it has been envisioned. Tim Berners-Lee created a markup language that tells a web browser how to visually display a page the way the author envisioned it.</p>
+    <p>Published text has always been marked up so that the author and publisher would be able to synchronize and lay out a publication the way it has been envisioned. Tim Berners-Lee created a markup language for the web based on these traditional publishing practices.</p>
     <img src="7-proof-marks.jpg" alt="Traditional proofreading marks used in publishing">
     <img src="8-tim-berners-lee.jpg" alt="Tim Berners-Lee">
 
@@ -43,7 +43,7 @@
     <img src="9-marc-andreessen.jpg" alt="Marc Andreessen">
 
     <h2>The Browser Wars and the W3C</h2>
-    <p>During the 1990s there were browser wars and HTML was becoming fragmented. Tim Berners-Lee created the <a href="https://www.w3.org/">W3C</a> (World Wide Web Consortium) to maintain HTML standards.</p>
+    <p>During the 1990s there were browser wars and HTML was becoming fragmented. Tim Berners-Lee created the <a href="https://www.w3.org/">W3C</a> (World Wide Web Consortium) to maintain HTML standards and ensure consistency across browsers.</p>
     <img src="12-w3c.png" alt="W3C logo">
 
     <h2>Versions of HTML</h2>
