@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babbled Brooke &middot; EvCC Graph 130</title>
+    <meta name="author" content="Brooke C. Howard">
+    <title>baBBled brooke &middot; Graphic &amp; Web Design ATA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@400;700&family=Fraunces:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
@@ -16,43 +17,67 @@
             --ink: #14110e;
             --coral: #ff6b5a;
             --sun: #ffd35c;
+            --night: #0a0810;
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { min-height: 100vh; }
+
         body {
             color: var(--cream);
             font-family: 'Fraunces', Georgia, serif;
             font-size: 18px;
             line-height: 1.6;
-            padding: 2.5rem 1.2rem 4rem;
+            padding: clamp(1.4rem, 4vw, 2.5rem) 1.2rem 4rem;
             position: relative;
             overflow-x: hidden;
+            background: var(--night);
         }
 
-        /* Live matrix-rain background + readability overlay */
         #matrix-bg {
             position: fixed;
             inset: 0;
             z-index: -2;
-            background: #0a0810;
+            background: var(--night);
             pointer-events: none;
             display: block;
             width: 100vw;
             height: 100vh;
         }
+
         body::after {
             content: "";
             position: fixed;
             inset: 0;
-            background:
-                radial-gradient(ellipse at 50% 30%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.68) 100%);
             z-index: -1;
             pointer-events: none;
+            background:
+                radial-gradient(ellipse at 50% 25%, rgba(38, 123, 114, 0.18) 0%, transparent 42%),
+                radial-gradient(ellipse at 50% 35%, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.72) 100%);
         }
 
-        main { max-width: 58rem; margin: 0 auto; position: relative; z-index: 1; }
+        main {
+            max-width: 58rem;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
 
-        /* Gate overlay for audio autoplay */
+        a {
+            color: var(--sun);
+            text-decoration: underline wavy var(--coral);
+            text-underline-offset: 4px;
+            overflow-wrap: anywhere;
+        }
+
+        a:hover,
+        a:focus-visible {
+            background: var(--sun);
+            color: var(--ink);
+            text-decoration-color: var(--ink);
+            outline: none;
+        }
+
         #gate {
             position: fixed;
             inset: 0;
@@ -63,8 +88,11 @@
             backdrop-filter: blur(8px);
             transition: opacity 1s ease;
             text-align: center;
+            padding: 1.5rem;
         }
+
         #gate.hidden { opacity: 0; pointer-events: none; }
+
         #gate p {
             font-family: 'Caveat', cursive;
             font-size: 1.6rem;
@@ -72,6 +100,7 @@
             margin-bottom: 1rem;
             opacity: 0.9;
         }
+
         #gate button {
             font-family: 'Archivo Black', sans-serif;
             font-size: 1.1rem;
@@ -84,11 +113,15 @@
             text-transform: uppercase;
             transition: all 0.25s ease;
         }
-        #gate button:hover {
+
+        #gate button:hover,
+        #gate button:focus-visible {
             background: var(--coral);
             border-color: var(--coral);
             color: var(--ink);
+            outline: none;
         }
+
         .gate-hint {
             margin-top: 1rem !important;
             font-family: 'Caveat', cursive !important;
@@ -97,67 +130,75 @@
             opacity: 0.85;
         }
 
-        /* Audio toggle */
         #audio-toggle {
             position: fixed;
             right: 1.2rem;
             bottom: 1.2rem;
             z-index: 20;
-            width: 3rem; height: 3rem;
+            width: 3rem;
+            height: 3rem;
             border-radius: 50%;
-            background: rgba(14, 13, 17, 0.6);
+            background: rgba(14, 13, 17, 0.68);
             color: var(--cream);
             border: 1.5px solid var(--cream);
             font-size: 1.4rem;
             cursor: pointer;
             backdrop-filter: blur(6px);
         }
-        #audio-toggle:hover { background: var(--coral); border-color: var(--coral); color: var(--ink); }
 
-        /* Hero */
+        #audio-toggle:hover,
+        #audio-toggle:focus-visible {
+            background: var(--coral);
+            border-color: var(--coral);
+            color: var(--ink);
+            outline: none;
+        }
+
         .hero {
             text-align: center;
-            padding: 4rem 0 3rem;
+            padding: clamp(2.4rem, 8vw, 4rem) 0 3rem;
         }
+
         .hello {
             display: inline-block;
             font-family: 'Caveat', cursive;
-            font-size: 2.2rem;
+            font-size: clamp(2rem, 6vw, 2.4rem);
             color: var(--coral);
             transform: rotate(-3deg);
             margin-bottom: 0.4rem;
             text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.55);
         }
+
         h1 {
             font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(3.2rem, 11vw, 7.5rem);
+            font-size: clamp(3.05rem, 10vw, 7.5rem);
             color: var(--cream);
             line-height: 0.92;
             letter-spacing: -0.025em;
-            text-transform: lowercase;
+            text-transform: none;
             text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 0, 0, 0.5);
         }
-        h1 .and {
+
+        h1 .brooke {
             font-family: 'Fraunces', serif;
             font-style: italic;
             font-weight: 700;
             color: var(--coral);
-            text-transform: none;
         }
+
         .blurb {
-            max-width: 36rem;
+            max-width: 42rem;
             margin: 1.8rem auto 0;
-            font-size: 1.12rem;
+            font-size: clamp(1.05rem, 2vw, 1.18rem);
             line-height: 1.6;
             color: var(--cream);
             text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
             opacity: 0.96;
         }
 
-        /* Why Babbled Brooke */
         .why-block {
             margin: 2rem 0 0;
-            padding: 2rem 2rem 2.2rem;
+            padding: clamp(1.5rem, 4vw, 2rem) clamp(1.4rem, 4vw, 2rem) 2.2rem;
             background: rgba(14, 13, 17, 0.72);
             border: 1.5px solid var(--coral);
             box-shadow: 10px 10px 0 var(--sun);
@@ -166,19 +207,27 @@
             color: var(--cream);
             transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
-        .why-block:hover { transform: translate(-2px, -3px) rotate(-0.9deg); box-shadow: 14px 14px 0 var(--sun); }
+
+        .why-block:hover,
+        .why-block:focus-within {
+            transform: translate(-2px, -3px) rotate(-0.9deg);
+            box-shadow: 14px 14px 0 var(--sun);
+        }
+
         .why-block h2 {
             color: var(--sun);
-            font-size: 2.3rem;
+            font-size: clamp(2rem, 5vw, 2.3rem);
             margin-bottom: 0.8rem;
             line-height: 1.05;
         }
+
         .why-block p {
             font-family: 'Fraunces', serif;
-            font-size: 1.18rem;
+            font-size: clamp(1.05rem, 2vw, 1.18rem);
             line-height: 1.6;
             color: var(--cream);
         }
+
         .why-block .babble {
             color: var(--coral);
             font-style: italic;
@@ -186,13 +235,13 @@
             letter-spacing: 0.06em;
         }
 
-        /* Cards */
         .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
             gap: 1.8rem;
             margin: 2.5rem 0 0;
         }
+
         .card {
             background: rgba(20, 17, 14, 0.68);
             backdrop-filter: blur(10px);
@@ -202,49 +251,62 @@
             transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
             position: relative;
             color: var(--cream);
+            min-width: 0;
         }
-        .card:hover, .card:focus-within {
+
+        .card:hover,
+        .card:focus-within {
             transform: translate(-2px, -3px) rotate(-0.6deg);
             box-shadow: 10px 10px 0 var(--teal);
             border-color: var(--teal-light);
         }
+
         .card:nth-child(3n+2) {
             box-shadow: 6px 6px 0 rgba(255, 107, 90, 0.85);
             transform: rotate(1deg);
         }
-        .card:nth-child(3n+2):hover {
+
+        .card:nth-child(3n+2):hover,
+        .card:nth-child(3n+2):focus-within {
             box-shadow: 10px 10px 0 var(--coral);
             transform: translate(-2px, -3px) rotate(1.5deg);
         }
+
         .card:nth-child(3n) {
             box-shadow: 6px 6px 0 rgba(255, 211, 92, 0.85);
             transform: rotate(-0.8deg);
         }
-        .card:nth-child(3n):hover {
+
+        .card:nth-child(3n):hover,
+        .card:nth-child(3n):focus-within {
             box-shadow: 10px 10px 0 var(--sun);
             transform: translate(-2px, -3px) rotate(-1.3deg);
         }
 
-        h2 {
+        h2, h3 {
             font-family: 'Caveat', cursive;
-            font-size: 1.9rem;
             line-height: 1.1;
             color: var(--sun);
+        }
+
+        h2 {
+            font-size: 1.9rem;
             margin-bottom: 0.4rem;
         }
+
         h3 {
-            font-family: 'Caveat', cursive;
             font-size: 1.7rem;
-            line-height: 1.1;
-            color: var(--sun);
             margin-bottom: 0.3rem;
         }
+
         .card p {
             font-size: 1.02rem;
             margin-top: 0.3rem;
             color: var(--cream);
         }
+
         .card p + p { margin-top: 0.5rem; }
+
         .big {
             font-family: 'Archivo Black', sans-serif;
             font-size: 3.2rem;
@@ -254,12 +316,14 @@
             margin: 0.4rem 0 0.3rem;
             text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
         }
+
         .pursuing-label {
             font-family: 'Archivo Black', sans-serif;
             color: var(--teal-light);
             font-size: 1.5rem;
             letter-spacing: 0.02em;
         }
+
         .aside {
             font-family: 'Caveat', cursive;
             font-size: 1.2rem;
@@ -267,24 +331,37 @@
             margin-top: 0.8rem !important;
             line-height: 1.2;
         }
+
         .aside em { color: var(--coral); font-style: italic; font-weight: 700; }
 
-        /* Artist callout */
+        .portfolio-link {
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
         .artist {
             grid-column: 1 / -1;
             background: rgba(38, 123, 114, 0.82);
             color: var(--cream);
-            padding: 2.2rem 2rem 2.3rem;
+            padding: clamp(1.6rem, 4vw, 2.2rem) clamp(1.4rem, 4vw, 2rem) 2.3rem;
             box-shadow: 10px 10px 0 var(--coral);
             transform: rotate(-0.4deg);
             border: 1.5px solid var(--teal-light);
             backdrop-filter: blur(6px);
         }
-        .artist:hover {
+
+        .artist:hover,
+        .artist:focus-within {
             transform: translate(-2px, -3px) rotate(-0.8deg);
             box-shadow: 14px 14px 0 var(--coral);
         }
+
         .artist h3 { color: var(--sun); font-size: 2.2rem; }
+
         .artist p {
             font-family: 'Fraunces', serif;
             font-style: italic;
@@ -292,7 +369,9 @@
             line-height: 1.55;
             color: var(--cream);
         }
+
         .artist strong { color: var(--sun); font-style: normal; }
+
         .artist::before,
         .artist::after {
             position: absolute;
@@ -303,20 +382,26 @@
             pointer-events: none;
             text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
         }
+
         .artist::before {
             content: "\201C";
-            top: -1.6rem; left: 1rem;
+            top: -1.6rem;
+            left: 1rem;
         }
+
         .artist::after {
             content: "\201D";
-            bottom: -3.5rem; right: 1rem;
+            bottom: -3.5rem;
+            right: 1rem;
         }
+
         .saville-gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 0.7rem;
             margin-top: 1.4rem;
         }
+
         .saville-gallery figure {
             margin: 0;
             overflow: hidden;
@@ -325,12 +410,18 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             aspect-ratio: 1 / 1;
         }
+
         .saville-gallery figure:hover {
             transform: translate(-2px, -2px) rotate(-1deg);
             box-shadow: 6px 6px 0 var(--sun);
             z-index: 2;
         }
-        .saville-gallery figure:nth-child(even):hover { transform: translate(-2px, -2px) rotate(1.2deg); box-shadow: 6px 6px 0 var(--coral); }
+
+        .saville-gallery figure:nth-child(even):hover {
+            transform: translate(-2px, -2px) rotate(1.2deg);
+            box-shadow: 6px 6px 0 var(--coral);
+        }
+
         .saville-gallery img {
             display: block;
             width: 100%;
@@ -338,7 +429,9 @@
             object-fit: cover;
             transition: transform 0.5s ease;
         }
+
         .saville-gallery figure:hover img { transform: scale(1.06); }
+
         .saville-credit {
             margin-top: 1rem;
             font-size: 0.88rem;
@@ -347,17 +440,12 @@
             color: var(--cream);
             opacity: 0.85;
         }
-        .saville-credit a { color: var(--sun); }
-        @media (max-width: 520px) {
-            .saville-gallery { grid-template-columns: repeat(2, 1fr); }
-        }
 
-        /* "What I'm making" feature card */
         .making {
             grid-column: 1 / -1;
             background: rgba(14, 13, 17, 0.72);
             border: 1.5px solid var(--coral);
-            padding: 2rem;
+            padding: clamp(1.4rem, 4vw, 2rem);
             box-shadow: 10px 10px 0 var(--sun);
             transform: rotate(0.5deg);
             display: grid;
@@ -367,7 +455,13 @@
             backdrop-filter: blur(8px);
             color: var(--cream);
         }
-        .making:hover { transform: translate(-2px, -3px) rotate(0.9deg); box-shadow: 14px 14px 0 var(--sun); }
+
+        .making:hover,
+        .making:focus-within {
+            transform: translate(-2px, -3px) rotate(0.9deg);
+            box-shadow: 14px 14px 0 var(--sun);
+        }
+
         .my-art {
             margin: 0;
             border: 2px solid var(--cream);
@@ -376,30 +470,36 @@
             aspect-ratio: 2 / 3;
             background: #1a1820;
         }
+
         .my-art img {
             display: block;
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
-        .making-text h2 { color: var(--coral); font-size: 2.2rem; margin-bottom: 0.8rem; }
-        .making-text p {
+
+        .making-text h2 {
+            color: var(--coral);
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .making-text p,
+        .music-text p {
             font-family: 'Fraunces', serif;
             font-size: 1.15rem;
             line-height: 1.55;
             color: var(--cream);
         }
+
         .making-text p + p { margin-top: 0.7rem; }
+
         .making-text .lede {
             font-style: italic;
             color: var(--sun);
             font-size: 1.08rem;
         }
-        @media (max-width: 700px) {
-            .making { grid-template-columns: 1fr; }
-            .making-text { text-align: center; }
-        }
 
-        /* "What's playing" block */
         .music {
             grid-column: 1 / -1;
             background: rgba(14, 13, 17, 0.72);
@@ -410,16 +510,19 @@
             backdrop-filter: blur(8px);
             color: var(--cream);
         }
-        .music:hover { transform: translate(-2px, -3px) rotate(-1deg); box-shadow: 14px 14px 0 var(--teal); }
-        .music h2 { color: var(--sun); font-size: 2.2rem; margin-bottom: 0.8rem; }
-        .music-text p {
-            font-family: 'Fraunces', serif;
-            font-size: 1.15rem;
-            line-height: 1.6;
-            color: var(--cream);
+
+        .music:hover,
+        .music:focus-within {
+            transform: translate(-2px, -3px) rotate(-1deg);
+            box-shadow: 14px 14px 0 var(--teal);
         }
 
-        /* Color swatch */
+        .music h2 {
+            color: var(--sun);
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+        }
+
         .color-row {
             display: grid;
             grid-template-columns: auto 1fr;
@@ -427,17 +530,21 @@
             gap: 1.2rem;
             margin-top: 0.5rem;
         }
+
         .swatch {
-            width: 84px; height: 84px;
+            width: 84px;
+            height: 84px;
             background: var(--teal);
             border: 2px solid var(--cream);
             box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.25), 3px 3px 0 rgba(0, 0, 0, 0.4);
             animation: swatch-wiggle 3.5s ease-in-out infinite;
         }
+
         @keyframes swatch-wiggle {
             0%, 100% { transform: rotate(-4deg); }
-            50%      { transform: rotate(4deg) scale(1.04); }
+            50% { transform: rotate(4deg) scale(1.04); }
         }
+
         .hex {
             font-family: 'Archivo Black', sans-serif;
             color: var(--teal-light);
@@ -449,12 +556,12 @@
             border: 1px solid var(--teal-light);
         }
 
-        /* Signature */
         .sig {
             text-align: center;
             margin-top: 3.5rem;
             padding: 1.5rem;
         }
+
         .sig .name {
             font-family: 'Caveat', cursive;
             font-size: 2.8rem;
@@ -465,6 +572,7 @@
             padding: 0 0.6rem 0.2rem;
             text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.55);
         }
+
         .sig small {
             display: block;
             font-family: 'Fraunces', serif;
@@ -475,7 +583,6 @@
             opacity: 0.8;
         }
 
-        /* Footer: colophon / credits */
         .colophon {
             margin: 2rem auto 0;
             max-width: 54rem;
@@ -485,6 +592,7 @@
             text-align: center;
             backdrop-filter: blur(6px);
         }
+
         .colophon p {
             font-family: 'Fraunces', serif;
             font-size: 0.88rem;
@@ -494,6 +602,7 @@
             line-height: 1.55;
             margin: 0.25rem 0;
         }
+
         .colophon .stack {
             font-family: 'Archivo Black', sans-serif;
             font-style: normal;
@@ -503,26 +612,38 @@
             color: var(--sun);
             opacity: 1;
         }
-        .colophon a { color: var(--sun); text-decoration-color: var(--coral); }
 
-        a {
-            color: var(--sun);
-            text-decoration: underline wavy var(--coral);
-            text-underline-offset: 4px;
-        }
-        a:hover { background: var(--sun); color: var(--ink); text-decoration-color: var(--ink); }
         em { color: var(--sun); font-style: italic; }
         strong { color: var(--cream); }
 
+        @media (max-width: 700px) {
+            .making { grid-template-columns: 1fr; }
+            .making-text { text-align: center; }
+            .artist::before { font-size: 5rem; top: -0.8rem; }
+            .artist::after { font-size: 5rem; bottom: -2.4rem; }
+        }
+
         @media (max-width: 520px) {
             .cards { grid-template-columns: 1fr; }
-            .artist::before { font-size: 5rem; top: -0.8rem; }
+            .saville-gallery { grid-template-columns: repeat(2, 1fr); }
+            .color-row { grid-template-columns: 1fr; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #matrix-bg { display: none; }
+            body { background: var(--night); }
+            .card,
+            .why-block,
+            .artist,
+            .making,
+            .music,
+            .swatch { transition: none; animation: none; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="matrix-bg"></canvas>
+    <canvas id="matrix-bg" aria-hidden="true"></canvas>
 
     <div id="gate">
         <div>
@@ -533,43 +654,48 @@
     </div>
 
     <audio id="bgm" preload="auto"></audio>
-
     <button id="audio-toggle" aria-label="Toggle sound" title="Toggle sound">&#9834;</button>
 
     <main>
         <section class="hero">
             <p class="hello">hi, I'm</p>
-            <h1>babbled <span class="and">&amp;</span> brooke</h1>
+            <h1>baBBled <span class="brooke">brooke</span></h1>
             <p class="blurb">
-                My first webpage, built for Everett CC's web design and coding class.
-                I've put a few webpages together outside of class too. I'm here to learn
-                the craft all the way down.
+                I am a second-year Graphic &amp; Web Design ATA student at Everett Community College.
+                This page is part of my web design work, but it also connects to the larger portfolio
+                I am building across typography, photography, publication design, and code.
             </p>
         </section>
 
         <section class="why-block">
-            <h2>Why Babbled Brooke</h2>
+            <h2>Why baBBled brooke</h2>
             <p>My mind is always thinking. The non-stop <span class="babble">BABBLE</span> used to madden me. I've learned to embrace it and go with the flow. Late nights. A lot of music. Always searching for inspiration.</p>
         </section>
 
         <section class="cards">
 
             <article class="card">
-                <h2>School &amp; Course</h2>
+                <h2>School</h2>
                 <p>Everett Community College</p>
-                <p><em>Graph 130 &middot; Web Design</em></p>
+                <p><em>Graphic &amp; Web Design ATA</em></p>
             </article>
 
             <article class="card">
                 <h3>Quarters at EvCC</h3>
-                <span class="big">3.5</span>
-                <p>Three full quarters, and I'm deep into my fourth.</p>
+                <span class="big">2nd</span>
+                <p>2nd year student.</p>
+            </article>
+
+            <article class="card">
+                <h3>Student Portfolio</h3>
+                <p>My larger school portfolio lives in my clean26 GitHub Pages site.</p>
+                <p><a class="portfolio-link" href="https://brookehoward2008-droid.github.io/clean26/">student portfolio link</a></p>
             </article>
 
             <article class="card">
                 <h3>What I'm pursuing</h3>
                 <p>A degree in</p>
-                <p><span class="pursuing-label">Graphic Design.</span></p>
+                <p><span class="pursuing-label">Graphic &amp; Web Design.</span></p>
                 <p class="aside">Art therapy too, one day.</p>
             </article>
 
@@ -632,7 +758,7 @@
 
         <p class="sig">
             <span class="name">Brooke</span>
-            <small>Babbled Brooke &middot; Spring 2026</small>
+            <small>baBBled brooke &middot; Graphic &amp; Web Design ATA &middot; Spring 2026</small>
         </p>
 
         <footer class="colophon">
@@ -643,7 +769,6 @@
     </main>
 
     <script>
-        /* Gate, audio, and matrix-rain audio-reactive background. */
         (function () {
             const gate = document.getElementById('gate');
             const enterBtn = document.getElementById('enter-btn');
@@ -651,16 +776,17 @@
             const toggle = document.getElementById('audio-toggle');
             audio.volume = 0.45;
 
-            /* Playlist: tracks cycle in order, loops at the end. */
             const playlist = [
                 'celestial-soda-pop.mp3',
                 'tiny-geometries.mp3'
             ];
+
             let trackIndex = 0;
             function loadTrack(i) {
                 audio.src = playlist[i];
                 audio.load();
             }
+
             loadTrack(0);
             audio.addEventListener('ended', () => {
                 trackIndex = (trackIndex + 1) % playlist.length;
@@ -668,7 +794,11 @@
                 audio.play().catch(() => {});
             });
 
-            let audioCtx = null, analyser = null, freqData = null, sourceNode = null;
+            let audioCtx = null;
+            let analyser = null;
+            let freqData = null;
+            let sourceNode = null;
+
             function hookAnalyser() {
                 if (sourceNode) return;
                 try {
@@ -680,7 +810,9 @@
                     sourceNode.connect(analyser);
                     analyser.connect(audioCtx.destination);
                     freqData = new Uint8Array(analyser.frequencyBinCount);
-                } catch (e) { console.warn('Audio analyser unavailable', e); }
+                } catch (e) {
+                    console.warn('Audio analyser unavailable', e);
+                }
             }
 
             function enter() {
@@ -690,6 +822,7 @@
                 audio.play().catch(() => {});
                 setTimeout(() => gate.remove(), 1100);
             }
+
             enterBtn.addEventListener('click', enter);
             gate.addEventListener('click', (e) => { if (e.target === gate) enter(); });
 
@@ -704,13 +837,16 @@
                 }
             });
 
-            /* Matrix-rain background */
             const canvas = document.getElementById('matrix-bg');
             const ctx = canvas.getContext('2d');
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
             const PALETTE = ['#267b72', '#3aa094', '#c5e5e1', '#ffd35c', '#ff6b5a', '#f5efdf'];
             const CHARS = '01░▒▓♪♫|/\\-+=·•◌○◉✦';
-            let w = 0, h = 0, cols = 0, drops = [], colDepth = [];
+            let w = 0;
+            let h = 0;
+            let cols = 0;
+            let drops = [];
+            let colDepth = [];
             const FS = 16;
 
             function resize() {
@@ -725,11 +861,13 @@
                 drops = new Array(cols).fill(0).map(() => Math.random() * -50);
                 colDepth = new Array(cols).fill(0).map(() => 0.6 + Math.random() * 0.4);
             }
+
             resize();
             window.addEventListener('resize', resize);
 
             function frame() {
                 let intensity = 0.12;
+
                 if (analyser) {
                     analyser.getByteFrequencyData(freqData);
                     let sum = 0;
@@ -740,14 +878,13 @@
                 ctx.globalCompositeOperation = 'source-over';
                 ctx.fillStyle = 'rgba(10, 8, 16, ' + (0.045 + intensity * 0.025) + ')';
                 ctx.fillRect(0, 0, w, h);
-
                 ctx.font = FS + 'px "Courier New", monospace';
                 ctx.textBaseline = 'top';
 
                 for (let i = 0; i < cols; i++) {
                     const x = i * FS;
                     const y = drops[i] * FS;
-                    const ch = CHARS[(Math.floor(Math.random() * CHARS.length))];
+                    const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
                     const color = PALETTE[(i + Math.floor(drops[i] / 4)) % PALETTE.length];
                     ctx.fillStyle = color;
                     ctx.globalAlpha = (0.35 + intensity * 0.55) * colDepth[i];
@@ -760,11 +897,15 @@
                     }
 
                     drops[i] += 0.12 + intensity * 0.35;
-                    if (drops[i] * FS > h && Math.random() > 0.985) drops[i] = -Math.random() * 20;
+                    if (drops[i] * FS > h && Math.random() > 0.985) {
+                        drops[i] = -Math.random() * 20;
+                    }
                 }
+
                 ctx.globalAlpha = 1;
                 requestAnimationFrame(frame);
             }
+
             frame();
         })();
     </script>
