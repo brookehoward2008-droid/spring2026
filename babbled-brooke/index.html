@@ -610,6 +610,59 @@
             margin-bottom: 0.8rem;
         }
 
+
+        .spotify-player {
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(247, 239, 215, 0.28);
+        }
+
+        .spotify-player h3 {
+            margin: 0 0 0.75rem;
+            color: var(--coral);
+            font-size: 1.15rem;
+        }
+
+        .spotify-playlist-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .spotify-playlist-button {
+            border: 1px solid rgba(247, 239, 215, 0.58);
+            border-radius: 999px;
+            padding: 0.45rem 0.72rem;
+            background: rgba(247, 239, 215, 0.08);
+            color: var(--cream);
+            font: inherit;
+            font-size: 0.78rem;
+            cursor: pointer;
+        }
+
+        .spotify-playlist-button:hover,
+        .spotify-playlist-button:focus-visible,
+        .spotify-playlist-button[aria-pressed="true"] {
+            background: var(--sun);
+            border-color: var(--sun);
+            color: var(--ink);
+            outline: none;
+        }
+
+        .spotify-embed {
+            display: block;
+            width: 100%;
+            min-height: 152px;
+            border: 0;
+            border-radius: 12px;
+            background: #121212;
+        }
+
+        .spotify-player-note {
+            margin: 0.65rem 0 0;
+            font-size: 0.84rem !important;
+        }
         .color-row {
             display: grid;
             grid-template-columns: auto 1fr;
@@ -713,7 +766,8 @@
         @media (max-width: 520px) {
             .cards { grid-template-columns: 1fr; }
             .saville-gallery { grid-template-columns: repeat(2, 1fr); }
-            .color-row { grid-template-columns: 1fr; }
+    
+        .color-row { grid-template-columns: 1fr; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -870,6 +924,12 @@
                     <p>My ear comes from my dad. He introduced me to music as a place where every style could belong: Mannheim Steamroller, synthesizers, Yanni, hymns, classical, Christian rock, classic oldies, and Neil Diamond all lived in the same house. That early mix taught me to listen for atmosphere, texture, repetition, drama, and the feeling a sound leaves behind.</p>
                     <p>Ray Lynch arrived on my thirteenth birthday and never really left. <em>Deep Breakfast</em> is still my favorite listen: bright, strange, spacious, and quietly emotional. These days my taste keeps moving between ambient and electronic music, cinematic instrumentals, piano and classical pieces, art-pop, alternative rock, oldies, soundtrack music, and songs with a strong sense of place. I like music that can build a world, hold a memory, or give a late-night design session its own weather.</p>
                     <p class="aside"><a href="https://open.spotify.com/search/Ray%20Lynch" target="_blank" rel="noopener">Explore the Ray Lynch sound on Spotify ↗</a><br><a href="https://open.spotify.com/user/121432639?si=bf83c667de174eca" target="_blank" rel="noopener">Visit my Spotify profile ↗</a></p>
+                    <div class="spotify-player" aria-labelledby="spotify-player-heading">
+                        <h3 id="spotify-player-heading">Playlists</h3>
+                        <div class="spotify-playlist-list" role="group" aria-label="Choose a Spotify playlist"></div>
+                        <iframe class="spotify-embed" title="Spotify playlist player" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                        <p class="aside spotify-player-note"><a href="https://open.spotify.com/user/121432639?si=bf83c667de174eca" target="_blank" rel="noopener">Open my full Spotify profile ↗</a></p>
+                    </div>
                 </div>
             </article>
 
@@ -895,6 +955,36 @@
             const toggle = document.getElementById('audio-toggle');
             audio.volume = 0.45;
 
+
+            const spotifyPlaylists = [
+                { id: '18Bpjs6iVtGP1ovDQ3xqKA', name: 'Chill' },
+                { id: '4q0fviftEFiTNRzWQyDCoH', name: 'Tranquil' },
+                { id: '42Pgs5sKYUvAq156ye9Qab', name: 'Graphic Design' },
+                { id: '1ys3lV1tlsezoItoQkI54l', name: 'trying to get lost...' },
+                { id: '23zxCH12FSCdl4pdvCdK3M', name: 'HIGH FREQUENCY MUSIC' },
+                { id: '3FW2TrkKhsoAjFeWytxWvE', name: 'Best AI covers 2025' },
+                { id: '4abiHazCwpjdg189P1jkCR', name: 'AI Covers Synth' },
+                { id: '2qRStLnlbQX12k9KgskGvJ', name: 'My playlist #17' },
+                { id: '5yVpe2j7Cc8fnFnMI2espz', name: 'Umm' },
+                { id: '2NyiSo5Sfe4BRahPfI8RqU', name: 'Mkkkkkknpokpl' }
+            ];
+            const spotifyList = document.querySelector('.spotify-playlist-list');
+            const spotifyFrame = document.querySelector('.spotify-embed');
+            if (spotifyList && spotifyFrame) {
+                spotifyPlaylists.forEach((playlist, index) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'spotify-playlist-button';
+                    button.textContent = playlist.name;
+                    button.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+                    button.addEventListener('click', () => {
+                        spotifyFrame.src = `https://open.spotify.com/embed/playlist/${playlist.id}?utm_source=generator&theme=0`;
+                        spotifyList.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', item === button ? 'true' : 'false'));
+                    });
+                    spotifyList.appendChild(button);
+                });
+                spotifyFrame.src = `https://open.spotify.com/embed/playlist/${spotifyPlaylists[0].id}?utm_source=generator&theme=0`;
+            }
             const playlist = [
                 'tiny-geometries.mp3',
                 'celestial-soda-pop.mp3'
@@ -1030,3 +1120,5 @@
     </script>
 </body>
 </html>
+
+
